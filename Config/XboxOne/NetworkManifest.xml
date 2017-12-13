@@ -1,0 +1,17 @@
+<mx:SocketDescriptions>
+	<mx:SocketDescription Name="GameSocketUdp" SecureIpProtocol="Udp" BoundPort="7777">
+		<mx:AllowedUsages>
+			<mx:SecureDeviceSocketUsage Type="Initiate" />
+			<mx:SecureDeviceSocketUsage Type="Accept" />
+			<mx:SecureDeviceSocketUsage Type="SendGameData" />
+			<mx:SecureDeviceSocketUsage Type="ReceiveGameData" />
+		</mx:AllowedUsages>
+	</mx:SocketDescription>
+</mx:SocketDescriptions>
+<mx:SecureDeviceAssociationTemplates>
+	<mx:SecureDeviceAssociationTemplate Name="GameTrafficUdp" InitiatorSocketDescription="GameSocketUdp" AcceptorSocketDescription="GameSocketUdp" MultiplayerSessionRequirement="None">
+		<mx:AllowedUsages>
+			<mx:SecureDeviceAssociationUsage Type="Default" />
+		</mx:AllowedUsages>
+	</mx:SecureDeviceAssociationTemplate>
+</mx:SecureDeviceAssociationTemplates>

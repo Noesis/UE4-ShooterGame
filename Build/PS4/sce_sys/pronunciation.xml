@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<gamePackage>
+  <language id="01" modified="0">
+    <speechRecognitionWords>
+      <text>ShooterGame</text>
+      <pronunciation>sh uw t er g ey m</pronunciation>
+    </speechRecognitionWords>
+    <speechRecognitionWords>
+      <text>ShooterGame</text>
+      <pronunciation>sh uw t er g m</pronunciation>
+    </speechRecognitionWords>
+  </language>
+</gamePackage>

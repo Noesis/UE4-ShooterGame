@@ -1,0 +1,8 @@
+..\..\..\Engine\Content\Editor\Slate\*.*
+..\..\..\Engine\Content\Localization\*.*
+..\..\..\Engine\Shaders\*.*
+..\..\..\Engine\config\*.*
+..\..\..\ShooterGame\Config\*.*
+..\..\..\ShooterGame\Content\Localization\*.*
+..\..\..\ShooterGame\Saved\Sandboxes\Cooked-WindowsServer\Engine\*.* ..\..\..\Engine\*.*
+..\..\..\ShooterGame\Saved\Sandboxes\Cooked-WindowsServer\ShooterGame\*.* ..\..\..\ShooterGame\*.*

@@ -1,0 +1,9 @@
+..\..\..\Engine\Content\Editor\Slate\*.*
+..\..\..\Engine\Content\Localization\*.*
+..\..\..\Engine\Shaders\*.*
+..\..\..\Engine\config\*.*
+..\..\..\ShooterGame\*.uproject
+..\..\..\ShooterGame\Config\*.*
+..\..\..\ShooterGame\Content\Localization\*.*
+..\..\..\ShooterGame\Saved\Sandboxes\Cooked-WindowsNoEditor\Engine\*.* ..\..\..\Engine\*.*
+..\..\..\ShooterGame\Saved\Sandboxes\Cooked-WindowsNoEditor\ShooterGame\*.* ..\..\..\ShooterGame\*.*

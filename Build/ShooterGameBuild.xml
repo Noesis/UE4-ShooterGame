@@ -1,0 +1,125 @@
+<?xml version='1.0' ?>
+<BuildGraph xmlns="http://www.epicgames.com/BuildGraph" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.epicgames.com/BuildGraph ../../../../Engine/Build/Graph/Schema.xsd" >
+
+	<!-- Other options -->
+	<Option Name="OutputDir" DefaultValue="$(RootDir)/LocalBuilds" Description="Output directory for packaged builds"/>
+
+	<!-- Options for client target platforms to build -->
+	<Option Name="WithClientForAndroid" Restrict="true|false" DefaultValue="true" Description="Include client for the Android target platform"/>
+	<Option Name="WithClientForHTML5" Restrict="true|false" DefaultValue="true" Description="Include client for the HTML5 target platform"/>
+	<Option Name="WithClientForLinux" Restrict="true|false" DefaultValue="true" Description="Include client for the Linux target platform"/>
+	<Option Name="WithClientForMac" Restrict="true|false" DefaultValue="true" Description="Include client for the Mac target platform"/>
+	<Option Name="WithClientForIOS" Restrict="true|false" DefaultValue="true" Description="Include client for the IOS target platform"/>
+	<Option Name="WithClientForPS4" Restrict="true|false" DefaultValue="true" Description="Include client for the PS4 target platform"/>
+	<Option Name="WithClientForSwitch" Restrict="true|false" DefaultValue="true" Description="Include client for the Switch target platform"/>
+	<Option Name="WithClientForWin32" Restrict="true|false" DefaultValue="true" Description="Include client for the Win32 target platform"/>
+	<Option Name="WithClientForWin64" Restrict="true|false" DefaultValue="true" Description="Include client for the Win64 target platform"/>
+	<Option Name="WithClientForXboxOne" Restrict="true|false" DefaultValue="true" Description="Include client for the XboxOne target platform"/>
+
+	<!-- Options for server target platforms to build -->
+	<Option Name="WithServerForLinux" Restrict="true|false" DefaultValue="true" Description="Include server for the Linux target platform"/>
+	<Option Name="WithServerForWin64" Restrict="true|false" DefaultValue="true" Description="Include server for the Win64 target platform"/>
+	<Option Name="WithServerForMac" Restrict="true|false" DefaultValue="true" Description="Include server for the Mac target platform"/>
+
+	<!-- Update the Version.h and Build.version files if we're making a formal build on a build machine -->
+	<Agent Name="Startup" Type="CompileWin64;Win64">
+		<Node Name="Update Version Files">
+			<SetVersion Change="$(Change)" Branch="$(EscapedBranch)" If="$(IsBuildMachine)"/>
+		</Node>
+	</Agent>
+
+	<!-- Compile executables for all the target platforms on a Windows host -->
+	<ForEach Name="AgentPlatform" Values="Win64;Mac">
+
+		<!-- Compile the editor and tools needed to cook and package -->
+		<Agent Name="ShooterGame Editor $(AgentPlatform)" Type="Compile$(AgentPlatform);$(AgentPlatform)">
+			<!-- Compile UnrealHeaderTool -->
+			<Node Name="Compile UnrealHeaderTool $(AgentPlatform)" Requires="Update Version Files">
+				<Compile Target="UnrealHeaderTool" Platform="$(AgentPlatform)" Configuration="Development"/>
+			</Node>
+
+			<!-- Compile the ShooterGame editor -->
+			<Node Name="Compile ShooterGameEditor $(AgentPlatform)" Requires="Compile UnrealHeaderTool $(AgentPlatform)">
+				<Compile Target="ShooterGameEditor" Platform="$(AgentPlatform)" Configuration="Development"/>
+			</Node>
+
+			<!-- Compile other tools we need to cook and package -->
+			<Node Name="Compile Tools $(AgentPlatform)" Requires="Compile UnrealHeaderTool $(AgentPlatform)">
+				<Compile Target="ShaderCompileWorker" Platform="$(AgentPlatform)" Configuration="Development"/>
+				<Compile Target="UnrealPak" Platform="$(AgentPlatform)" Configuration="Development"/>
+			</Node>
+		</Agent>
+
+		<!-- Declare properties to contain a list of client and server platforms that can be built from this host platform. -->
+		<Property Name="ClientPlatforms" Value=""/>
+		<Switch>
+			<Case If="$(AgentPlatform) == 'Win64'">
+				<Property Name="ClientPlatforms" Value="$(ClientPlatforms)Android;" If="$(WithClientForAndroid)"/>
+				<Property Name="ClientPlatforms" Value="$(ClientPlatforms)HTML5;" If="$(WithClientForHTML5)"/>
+				<Property Name="ClientPlatforms" Value="$(ClientPlatforms)Linux;" If="$(WithClientForLinux)"/>
+				<Property Name="ClientPlatforms" Value="$(ClientPlatforms)PS4;" If="$(WithClientForPS4)"/>
+				<Property Name="ClientPlatforms" Value="$(ClientPlatforms)Switch;" If="$(WithClientForSwitch)"/>
+				<Property Name="ClientPlatforms" Value="$(ClientPlatforms)Win32;" If="$(WithClientForWin32)"/>
+				<Property Name="ClientPlatforms" Value="$(ClientPlatforms)Win64;" If="$(WithClientForWin64)"/>
+				<Property Name="ClientPlatforms" Value="$(ClientPlatforms)XboxOne;" If="$(WithClientForXboxOne)"/>
+			</Case>
+			<Case If="$(AgentPlatform) == 'Mac'">
+				<Property Name="ClientPlatforms" Value="$(ClientPlatforms)Mac;" If="$(WithClientForMac)"/>
+				<Property Name="ClientPlatforms" Value="$(ClientPlatforms)IOS;" If="$(WithClientForIOS)"/>
+			</Case>
+		</Switch>
+
+		<!-- Compile all the client executables -->
+		<Agent Name="Compile ShooterGame Clients ($(AgentPlatform))" Type="Compile$(AgentPlatform);$(AgentPlatform)">
+			<ForEach Name="ClientPlatform" Values="$(ClientPlatforms)">
+				<Node Name="Compile ShooterClient $(ClientPlatform)" Requires="Compile UnrealHeaderTool $(AgentPlatform)">
+					<Compile Target="ShooterClient" Platform="$(ClientPlatform)" Configuration="Development"/>
+				</Node>
+			</ForEach>
+		</Agent>
+
+		<!-- Package all the client builds -->
+		<Agent Name="Package ShooterGame Clients ($(AgentPlatform))" Type="$(AgentPlatform)">
+			<ForEach Name="ClientPlatform" Values="$(ClientPlatforms)">
+        <Property Name="CookFlavor" Value=""/>
+        <Property Name="CookFlavor" Value="ETC2" If="$(ClientPlatform) == 'Android'"/>
+        <Node Name="Package ShooterClient $(ClientPlatform)" Requires="Compile ShooterGameEditor $(AgentPlatform);Compile Tools $(AgentPlatform);Compile ShooterClient $(ClientPlatform)">        
+					<Command Name="BuildCookRun" Arguments="-Project=&quot;Samples/Games/ShooterGame/ShooterGame.uproject&quot; -SkipBuild -Cook -Stage -Pak -Package -Platform=$(ClientPlatform) -CookFlavor=$(CookFlavor) -Client -ClientConfig=Development -Archive -ArchiveDirectory=&quot;$(OutputDir)&quot;"/>
+				</Node>
+			</ForEach>
+		</Agent>
+
+		<!-- Declare properties to contain a list of client and server platforms that can be built from this host platform. -->
+		<Property Name="ServerPlatforms" Value=""/>
+		<Switch>
+			<Case If="$(AgentPlatform) == 'Win64'">
+				<Property Name="ServerPlatforms" Value="$(ServerPlatforms)Win64;" If="$(WithServerForWin64)"/>
+				<Property Name="ServerPlatforms" Value="$(ServerPlatforms)Linux;" If="$(WithServerForLinux)"/>
+			</Case>
+			<Case If="$(AgentPlatform) == 'Mac'">
+				<Property Name="ServerPlatforms" Value="$(ServerPlatforms)Mac;" If="$(WithServerForMac)"/>
+			</Case>
+		</Switch>
+
+		<!-- Compile all the server executables -->
+		<Agent Name="Compile ShooterGame Servers ($(AgentPlatform))" Type="Compile$(AgentPlatform);$(AgentPlatform)">
+			<ForEach Name="ServerPlatform" Values="$(ServerPlatforms)">
+				<Node Name="Compile ShooterGameServer $(ServerPlatform)" Requires="Compile UnrealHeaderTool $(AgentPlatform)">
+					<Compile Target="ShooterGameServer" Platform="$(ServerPlatform)" Configuration="Development"/>
+				</Node>
+			</ForEach>
+		</Agent>
+
+		<!-- Package all the server builds -->
+		<Agent Name="Package ShooterGame Servers ($(AgentPlatform))" Type="$(AgentPlatform)">
+			<ForEach Name="ServerPlatform" Values="$(ServerPlatforms)">
+				<Node Name="Package ShooterGameServer $(ServerPlatform)" Requires="Compile ShooterGameEditor $(AgentPlatform);Compile Tools $(AgentPlatform);Compile ShooterGameServer $(ServerPlatform)">
+					<Command Name="BuildCookRun" Arguments="-Project=&quot;Samples/Games/ShooterGame/ShooterGame.uproject&quot; -SkipBuild -Cook -Stage -Pak -Package -Platform=$(ServerPlatform) -NoClient -Server -ServerConfig=Development -Archive -ArchiveDirectory=&quot;$(OutputDir)&quot;"/>
+				</Node>
+			</ForEach>
+		</Agent>
+	</ForEach>
+
+	<!-- Declare an aggregate wrapping all the package nodes -->
+	<Aggregate Name="Package ShooterGame" Requires="Package ShooterGame Clients (Win64);Package ShooterGame Clients (Mac);Package ShooterGame Servers (Win64);Package ShooterGame Servers (Mac)"/>
+</BuildGraph>

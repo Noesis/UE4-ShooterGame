@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trophytrp fmt_ver="3" service_label="0">
+ <file name="TROPCONF.SFM" path="">
+  <trophyconf version="1.1" platform="ps4" policy="small">
+   <npcommid>AAAA00000_00</npcommid>
+   <trophyset-version>01.00</trophyset-version>
+   <trophy id="000" hidden="no" ttype="B" pid="-1"/>
+   <trophy id="001" hidden="no" ttype="B" pid="-1"/>
+   <trophy id="002" hidden="yes" ttype="S" pid="-1"/>
+   <trophy id="003" hidden="no" ttype="B" pid="-1"/>
+   <trophy id="004" hidden="no" ttype="B" pid="-1"/>
+   <trophy id="005" hidden="no" ttype="B" pid="-1"/>
+   <trophy id="006" hidden="no" ttype="B" pid="-1"/>
+   <trophy id="007" hidden="no" ttype="S" pid="-1"/>
+   <trophy id="008" hidden="no" ttype="B" pid="-1"/>
+   <trophy id="009" hidden="no" ttype="B" pid="-1"/>
+   <trophy id="010" hidden="no" ttype="B" pid="-1"/>
+   <trophy id="011" hidden="no" ttype="G" pid="-1"/>
+   <trophy id="012" hidden="no" ttype="B" pid="-1"/>
+   <trophy id="013" hidden="no" ttype="B" pid="-1"/>
+  </trophyconf>
+ </file>
+ <file name="TROP.SFM" path="">
+  <trophyconf version="1.1" platform="ps4" policy="small">
+   <title-name>ShooterGame</title-name>
+   <title-detail>Run around. Shoot things. Score points. Have fun.</title-detail>
+   <trophy id="000">
+    <name>First Kill</name>
+    <detail>You made your first kill.</detail>
+   </trophy>
+   <trophy id="001">
+    <name>Getting Started</name>
+    <detail>You killed ten opponents.</detail>
+   </trophy>
+   <trophy id="002">
+    <name>Serial Killer</name>
+    <detail>You killed 20 opponents.</detail>
+   </trophy>
+   <trophy id="003">
+    <name>First Round</name>
+    <detail>You joined the game.</detail>
+   </trophy>
+   <trophy id="004">
+    <name>Addicted</name>
+    <detail>You've been playing far too long.  Play 5 rounds.</detail>
+   </trophy>
+   <trophy id="005">
+    <name>First Win</name>
+    <detail>You were the best… once.</detail>
+   </trophy>
+   <trophy id="006">
+    <name>Win A Few</name>
+    <detail>You won 3 rounds.</detail>
+   </trophy>
+   <trophy id="007">
+    <name>It's Not Luck Anymore</name>
+    <detail>You won 5 rounds.&#x0a;</detail>
+   </trophy>
+   <trophy id="008">
+    <name>It's Not a Railgun</name>
+    <detail>You've severely damaged our arena. The bill is in the mail. Shoot 100 bullets.</detail>
+   </trophy>
+   <trophy id="009">
+    <name>Big Ba-Da-Boom</name>
+    <detail>You're a pyro, aren't you? Shoot 10 rockets.</detail>
+   </trophy>
+   <trophy id="010">
+    <name>Excellent Score</name>
+    <detail>Your high score is at least 10.</detail>
+   </trophy>
+   <trophy id="011">
+    <name>Who's Still Willing To Play Against You?</name>
+    <detail>You didn't cheat, did you? We'll know if you did. High score of at least 15.</detail>
+   </trophy>
+   <trophy id="012">
+    <name>Sanctuary, Nothing</name>
+    <detail>Played a Sanctuary mission.</detail>
+   </trophy>
+   <trophy id="013">
+    <name>Very High</name>
+    <detail>Played a Highrise mission.</detail>
+   </trophy>
+  </trophyconf>
+ </file>
+ <file name="ICON0.PNG" path="TrophySetIcon.png" />
+ <file name="TROP000.PNG" path="TrophyIcon000.png" />
+ <file name="TROP001.PNG" path="TrophyIcon001.png" />
+ <file name="TROP002.PNG" path="TrophyIcon002.png" />
+ <file name="TROP003.PNG" path="TrophyIcon003.png" />
+ <file name="TROP004.PNG" path="TrophyIcon004.png" />
+ <file name="TROP005.PNG" path="TrophyIcon005.png" />
+ <file name="TROP006.PNG" path="TrophyIcon006.png" />
+ <file name="TROP007.PNG" path="TrophyIcon007.png" />
+ <file name="TROP008.PNG" path="TrophyIcon008.png" />
+ <file name="TROP009.PNG" path="TrophyIcon009.png" />
+ <file name="TROP010.PNG" path="TrophyIcon010.png" />
+ <file name="TROP011.PNG" path="TrophyIcon011.png" />
+ <file name="TROP012.PNG" path="TrophyIcon012.png" />
+ <file name="TROP013.PNG" path="TrophyIcon013.png" />
+</trophytrp>
