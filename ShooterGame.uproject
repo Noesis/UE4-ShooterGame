@@ -63,6 +63,10 @@
 		{
 			"Name": "SteamController",
 			"Enabled": true
+		},
+		{
+			"Name": "NoesisGUI",
+			"Enabled": true
 		}
 	],
 	"TargetPlatforms": [
