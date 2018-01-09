@@ -1,0 +1,540 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+  xmlns:noesis="clr-namespace:NoesisGUIExtensions">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Resources.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <LinearGradientBrush x:Key="Brush.PanelBorder.Light" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="{StaticResource Color.Primary}" Offset="0"/>
+        <GradientStop Color="{StaticResource Color.Primary.Transparent}" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="Brush.PanelBorder.Dark" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="{StaticResource Color.SecondaryShade25}" Offset="0"/>
+        <GradientStop Color="{StaticResource Color.SecondaryShade25.Transparent}" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="Brush.PanelBackground" EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.55">
+        <GradientStop Color="{StaticResource Color.SecondaryShade25}" Offset="0.15"/>
+        <GradientStop Color="{StaticResource Color.Secondary.Transparent}" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="Brush.PanelTopGradient" StartPoint="0,0" EndPoint="0,1" Opacity="0.2">
+        <GradientStop Color="{StaticResource Color.SecondaryShade25}" Offset="0.5"/>
+        <GradientStop Color="{StaticResource Color.SecondaryShade25.Transparent}" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="Brush.PanelBottomGradient" StartPoint="0,0" EndPoint="0,1" Opacity="0.2">
+        <GradientStop Color="{StaticResource Color.SecondaryShade25.Transparent}" Offset="0"/>
+        <GradientStop Color="{StaticResource Color.SecondaryShade25}" Offset="0.5"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="Brush.ControlFocusedBackground" StartPoint="0,0" EndPoint="1,0" Opacity="0.75">
+        <GradientStop Color="{StaticResource Color.SecondaryShade25}" Offset="0"/>
+        <GradientStop Color="{StaticResource Color.SecondaryShade0}" Offset="1"/>
+    </LinearGradientBrush>
+    <ControlTemplate x:Key="Template.MenuButton" TargetType="Button">
+        <ControlTemplate.Resources>
+            <Storyboard x:Key="OnBtnSelected">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Bg">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="Bg">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="OnBtnUnselected">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="Bg">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+        </ControlTemplate.Resources>
+        <Grid Background="Transparent">
+            <Border x:Name="Bg" RenderTransformOrigin="0,0.5">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="{StaticResource Color.SecondaryShade25.Transparent}" Offset="0"/>
+                        <GradientStop Color="{StaticResource Color.SecondaryShade25}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0" ScaleY="0"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="2"/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+            </Border>
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource Brush.PrimaryShade100}"/>
+            </Trigger>
+            <Trigger Property="Tag" Value="Selected">
+                <Setter Property="Foreground" Value="{StaticResource Brush.PrimaryShade100}"/>
+                <Trigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource OnBtnSelected}"/>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard Storyboard="{StaticResource OnBtnUnselected}"/>
+                </Trigger.ExitActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style x:Key="Style.MenuButton" TargetType="Button">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="Margin" Value="0,2"/>
+        <Setter Property="Template" Value="{StaticResource Template.MenuButton}"/>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <ControlTemplate x:Key="Template.MenuPanel" TargetType="ContentControl">
+        <Border BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+            <Grid>
+                <Path Data="{StaticResource Geometry.HorizontalStrips}" Stretch="Fill" VerticalAlignment="Top" Height="40" Fill="{StaticResource Brush.PanelTopGradient}"/>
+                <Path Data="{StaticResource Geometry.HorizontalStrips}" Stretch="Fill" VerticalAlignment="Bottom" Height="40" Fill="{StaticResource Brush.PanelBottomGradient}"/>
+                <ContentPresenter/>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+    <Style x:Key="Style.MenuPanel" TargetType="{x:Type ContentControl}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Brush.PanelBorder.Light}"/>
+        <Setter Property="Background" Value="{StaticResource Brush.PanelBackground}"/>
+        <Setter Property="Template" Value="{StaticResource Template.MenuPanel}"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="RenderTransformOrigin" Value="0,0"/>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Tag" Value="{x:Null}">
+                <Setter Property="IsEnabled" Value="False"/>
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0">
+                                    <EasingDoubleKeyFrame.EasingFunction>
+                                        <SineEase EasingMode="EaseIn"/>
+                                    </EasingDoubleKeyFrame.EasingFunction>
+                                </EasingDoubleKeyFrame>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+            </Trigger>
+            <Trigger Property="Tag" Value="Show">
+                <Setter Property="IsEnabled" Value="True"/>
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="-8"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-8"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                                    <EasingDoubleKeyFrame.EasingFunction>
+                                        <SineEase EasingMode="EaseOut"/>
+                                    </EasingDoubleKeyFrame.EasingFunction>
+                                </EasingDoubleKeyFrame>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
+                                    <EasingDoubleKeyFrame.EasingFunction>
+                                        <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
+                                    </EasingDoubleKeyFrame.EasingFunction>
+                                </EasingDoubleKeyFrame>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
+                                    <EasingDoubleKeyFrame.EasingFunction>
+                                        <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
+                                    </EasingDoubleKeyFrame.EasingFunction>
+                                </EasingDoubleKeyFrame>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <ControlTemplate x:Key="Template.CheckBox" TargetType="CheckBox">
+        <ControlTemplate.Resources>
+            <Geometry x:Key="CheckedPath">M0,6 L3,9 9,0 6,0 3,6 0,3</Geometry>
+            <Geometry x:Key="NullPath">M1,1 L8,1 8,8 1,8 Z</Geometry>
+        </ControlTemplate.Resources>
+        <Grid x:Name="Root" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <ContentPresenter Margin="4,0"/>
+            <Border x:Name="Border" Grid.Column="1" BorderThickness="1" BorderBrush="{StaticResource Brush.Primary}" Margin="4,0" Padding="2" Width="13" Height="13">
+                <Border.Background>
+                    <SolidColorBrush Color="{StaticResource Color.SecondaryShade25}" Opacity="0.5"/>
+                </Border.Background>
+                <Path x:Name="CheckMark" Data="{StaticResource CheckedPath}" Stretch="Fill" Fill="{StaticResource Brush.Secondary}" Visibility="Collapsed"/>
+            </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource Brush.SecondaryShade0}"/>
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsThreeState" Value="True"/>
+                    <Condition Property="IsChecked" Value="{x:Null}"/>
+                </MultiTrigger.Conditions>
+                <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="CheckMark" Property="Data" Value="{StaticResource NullPath}"/>
+            </MultiTrigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource Brush.Secondary}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush.PrimaryShade100}"/>
+            </Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource Brush.Secondary}"/>
+                <Setter TargetName="Root" Property="Background" Value="{StaticResource Brush.ControlFocusedBackground}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush.PrimaryShade100}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style TargetType="CheckBox">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Margin" Value="0,0,0,1"/>
+        <Setter Property="Template" Value="{StaticResource Template.CheckBox}"/>
+    </Style>
+    <ControlTemplate x:Key="Template.ComboBox.DropDownButton" TargetType="ToggleButton">
+        <Grid Background="Transparent"/>
+    </ControlTemplate>
+    <ControlTemplate x:Key="Template.ComboBox" TargetType="ComboBox">
+        <ControlTemplate.Resources>
+            <Geometry x:Key="Geometry.Arrow">M0,0L4,4 8,0</Geometry>
+            <Storyboard x:Key="OnDropDownPressed">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="Arrow">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="2"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="2"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <SineEase EasingMode="EaseOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="PopupBorder">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <SineEase EasingMode="EaseOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+        </ControlTemplate.Resources>
+        <Grid x:Name="Root" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{TemplateBinding Tag}" VerticalAlignment="Stretch" Foreground="{TemplateBinding Foreground}" Margin="4,0,4,-2"/>
+            <ToggleButton x:Name="DropDownButton" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,4,0" Focusable="False" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Template="{StaticResource Template.ComboBox.DropDownButton}"/>
+            <Border x:Name="Border" Grid.Column="1" BorderThickness="0,0,0,1" BorderBrush="{StaticResource Brush.Primary}" Padding="0,0,4,0" IsHitTestVisible="False">
+                <ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Center" ContentSource="SelectionBoxItem"/>
+            </Border>
+            <Border x:Name="DropDown" Grid.Column="2" BorderThickness="0,0,0,1" BorderBrush="{StaticResource Brush.Primary}" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" IsHitTestVisible="False" Padding="7,8,1,4" Margin="0,0,4,0">
+                <Path x:Name="Arrow" Data="{StaticResource Geometry.Arrow}" VerticalAlignment="Stretch" Stretch="Fill" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="{StaticResource Brush.Primary}" StrokeThickness="2" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+            </Border>
+            <Border Grid.Column="1" Grid.ColumnSpan="2">
+                <Popup x:Name="PART_Popup" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" Focusable="False" Placement="Bottom" PopupAnimation="Slide" AllowsTransparency="True">
+                    <Border x:Name="PopupBorder" Width="{Binding ActualWidth, ElementName=DropDownButton}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                        <Border.Background>
+                            <SolidColorBrush Color="{StaticResource Color.SecondaryShade25}" Opacity="0.8"/>
+                        </Border.Background>
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                        <ScrollViewer Margin="0" HorizontalScrollBarVisibility="Disabled">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </Border>
+                </Popup>
+            </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsDropDownOpen" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource OnDropDownPressed}"/>
+                </Trigger.EnterActions>
+            </Trigger>
+            <Trigger Property="HasItems" Value="False">
+                <Setter TargetName="PopupBorder" Property="MinHeight" Value="40"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource Brush.Secondary}"/>
+                <Setter TargetName="DropDown" Property="BorderBrush" Value="{StaticResource Brush.Secondary}"/>
+                <Setter TargetName="Arrow" Property="Stroke" Value="{StaticResource Brush.Secondary}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush.PrimaryShade100}"/>
+            </Trigger>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter TargetName="Root" Property="Background" Value="{StaticResource Brush.ControlFocusedBackground}"/>
+                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource Brush.Secondary}"/>
+                <Setter TargetName="DropDown" Property="BorderBrush" Value="{StaticResource Brush.Secondary}"/>
+                <Setter TargetName="Arrow" Property="Stroke" Value="{StaticResource Brush.Secondary}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush.PrimaryShade100}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style TargetType="ComboBox">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Margin" Value="0,0,0,1"/>
+        <Setter Property="MaxDropDownHeight" Value="80"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+        <Setter Property="Template" Value="{StaticResource Template.ComboBox}"/>
+    </Style>
+    <ControlTemplate x:Key="Template.ComboBoxItem" TargetType="ComboBoxItem">
+        <Border x:Name="Border" Background="Transparent" Padding="4,0">
+            <ContentPresenter/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsHighlighted" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource Brush.PrimaryShade100}"/>
+                <Setter Property="Background" Value="{StaticResource Brush.Primary}" TargetName="Border"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style TargetType="ComboBoxItem">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Template" Value="{StaticResource Template.ComboBoxItem}"/>
+    </Style>
+    <ControlTemplate x:Key="Template.Slider.Repeat" TargetType="RepeatButton">
+        <Border Background="Transparent"/>
+    </ControlTemplate>
+    <ControlTemplate x:Key="Template.Slider.Thumb" TargetType="Thumb">
+        <Border CornerRadius="1" BorderThickness="1" Margin="-2">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{StaticResource Color.SecondaryShade0}" Opacity="0.2"/>
+            </Border.BorderBrush>
+            <Border x:Name="Border" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Background="{StaticResource Brush.PrimaryShade75}">
+                <Border x:Name="Drag" BorderThickness="0,1" BorderBrush="{TemplateBinding BorderBrush}" Margin="2,4"/>
+            </Border>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource Brush.SecondaryShade100}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="Template.Slider" TargetType="Slider">
+        <Grid x:Name="Root" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="19*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{TemplateBinding Tag}" Margin="4,0"/>
+            <Grid Grid.Column="1" Margin="4,2">
+                <Border x:Name="TrackBg" Height="2" Background="{StaticResource Brush.Primary}"/>
+                <Track x:Name="PART_Track">
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Template="{StaticResource Template.Slider.Repeat}" Command="Slider.DecreaseLarge" Focusable="False"/>
+                    </Track.DecreaseRepeatButton>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Template="{StaticResource Template.Slider.Repeat}" Command="Slider.IncreaseLarge" Focusable="False"/>
+                    </Track.IncreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb x:Name="Thumb" Width="10" Height="14" BorderBrush="{StaticResource Brush.Primary}" Template="{StaticResource Template.Slider.Thumb}"/>
+                    </Track.Thumb>
+                </Track>
+            </Grid>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="TrackBg" Property="Background" Value="{StaticResource Brush.Secondary}"/>
+                <Setter TargetName="Thumb" Property="BorderBrush" Value="{StaticResource Brush.Secondary}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush.PrimaryShade100}"/>
+            </Trigger>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter TargetName="Root" Property="Background" Value="{StaticResource Brush.ControlFocusedBackground}"/>
+                <Setter TargetName="TrackBg" Property="Background" Value="{StaticResource Brush.Secondary}"/>
+                <Setter TargetName="Thumb" Property="BorderBrush" Value="{StaticResource Brush.Secondary}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush.PrimaryShade100}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style TargetType="Slider">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Margin" Value="0,0,0,1"/>
+        <Setter Property="Template" Value="{StaticResource Template.Slider}"/>
+    </Style>
+    <ControlTemplate x:Key="Template.Button" TargetType="Button">
+        <Border x:Name="Base" BorderThickness="0,0,0,1" BorderBrush="#30000000" Background="{StaticResource Brush.PrimaryShade0}">
+            <Border x:Name="Border" BorderThickness="1">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource Brush.PrimaryShade100}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="Base" Property="BorderThickness" Value="0"/>
+                <Setter TargetName="Base" Property="Margin" Value="0,1,0,0"/>
+            </Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource Brush.SecondaryShade25}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style TargetType="Button">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template" Value="{StaticResource Template.Button}"/>
+    </Style>
+    <ControlTemplate x:Key="Template.ListBox" TargetType="{x:Type ListBox}">
+        <Border x:Name="Border" BorderThickness="1" BorderBrush="{StaticResource Brush.Primary}">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource Color.SecondaryShade25}" Opacity="0.5"/>
+            </Border.Background>
+            <ScrollViewer Focusable="False" Margin="0.5">
+                <ItemsPresenter />
+            </ScrollViewer>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource Brush.Secondary}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style TargetType="ListBox">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template" Value="{StaticResource Template.ListBox}"/>
+    </Style>
+    <ControlTemplate x:Key="Template.ListBoxItem" TargetType="ListBoxItem">
+        <Border x:Name="Border" Background="Transparent" Padding="4,0">
+            <ContentPresenter/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource Brush.PrimaryShade100}"/>
+                <Setter TargetName="Border" Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{StaticResource Color.SecondaryShade75}" Opacity="0.2"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource Brush.PrimaryShade100}"/>
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource Brush.Primary}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style TargetType="ListBoxItem">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Template" Value="{StaticResource Template.ListBoxItem}"/>
+    </Style>
+    <ControlTemplate x:Key="Template.ScrollBar.Thumb" TargetType="Thumb">
+        <Border CornerRadius="1" BorderThickness="1">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{StaticResource Color.SecondaryShade0}" Opacity="0.2"/>
+            </Border.BorderBrush>
+            <Border x:Name="Border" Background="{StaticResource Brush.Secondary}"/>
+        </Border>
+    </ControlTemplate>
+    <ControlTemplate x:Key="Template.ScrollBar.Horizontal" TargetType="ScrollBar">
+        <Border>
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource Color.SecondaryShade0}" Opacity="0.5"/>
+            </Border.Background>
+            <Track x:Name="PART_Track" Orientation="Horizontal">
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton Template="{StaticResource Template.Slider.Repeat}"/>
+                </Track.DecreaseRepeatButton>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton Template="{StaticResource Template.Slider.Repeat}"/>
+                </Track.IncreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb x:Name="Thumb" Template="{StaticResource Template.ScrollBar.Thumb}"/>
+                </Track.Thumb>
+            </Track>
+        </Border>
+    </ControlTemplate>
+    <ControlTemplate x:Key="Template.ScrollBar.Vertical" TargetType="ScrollBar">
+        <Border>
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource Color.SecondaryShade0}" Opacity="0.5"/>
+            </Border.Background>
+            <Track x:Name="PART_Track" Orientation="Vertical" IsDirectionReversed="True">
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton Template="{StaticResource Template.Slider.Repeat}"/>
+                </Track.DecreaseRepeatButton>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton Template="{StaticResource Template.Slider.Repeat}"/>
+                </Track.IncreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb x:Name="Thumb" Template="{StaticResource Template.ScrollBar.Thumb}"/>
+                </Track.Thumb>
+            </Track>
+        </Border>
+    </ControlTemplate>
+    <Style TargetType="ScrollBar">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Height" Value="6"/>
+                <Setter Property="Template" Value="{StaticResource Template.ScrollBar.Horizontal}"/>
+            </Trigger>
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="Width" Value="6"/>
+                <Setter Property="Template" Value="{StaticResource Template.ScrollBar.Vertical}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

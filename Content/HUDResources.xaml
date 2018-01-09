@@ -1,0 +1,515 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+  xmlns:noesis="clr-namespace:NoesisGUIExtensions">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Resources.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <BooleanToVisibilityConverter x:Key="Converter.BooleanToVisibility"/>
+    <RadialGradientBrush x:Key="Brush.Damage">
+        <GradientStop Color="{StaticResource Color.BloodVivid.Transparent}" Offset="0.3"/>
+        <GradientStop Color="#4FFF1A00" Offset="0.6"/>
+        <GradientStop Color="{StaticResource Color.BloodDark}" Offset="0.75"/>
+        <GradientStop Color="{StaticResource Color.BloodDark}" Offset="0.8"/>
+        <GradientStop Color="#3FF31800" Offset="0.85"/>
+        <GradientStop Color="{StaticResource Color.BloodVivid.Transparent}" Offset="1"/>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="Brush.DamageMask" Center="0.5,0.12" GradientOrigin="0.5,0.12" RadiusX="0.3" RadiusY="0.15">
+        <GradientStop Color="Black" Offset="0"/>
+        <GradientStop Offset="1"/>
+    </RadialGradientBrush>
+    <Geometry x:Key="Geometry.Weapon.Gun">M71.919584,27.533956 L68.831095,27.534177 C68.385219,27.85079 68.051629,28.434817 67.969449,29.617579 67.961563,31.165495 68.251346,31.829196 68.759528,31.844151 69.249004,32.182983 70.140341,32.226835 71.417064,31.987802 L72.781745,31.05408 C72.789437,31.70077 72.681566,32.319531 72.207143,32.849702 71.593851,33.253935 70.398324,33.517671 68.615877,33.639777 67.571398,33.453783 66.895169,32.802095 66.461115,31.844151 L61.145783,39.960372 61.433342,42.402419 67.32302,43.407969 72.494445,40.894097 73.715478,30.479478 z M77.018997,9.7220003 C76.558783,11.977957 76.582643,12.919149 77.019421,12.738834 80.131857,12.88242 79.413602,14.989288 82.478085,15.036775 L98.567049,15.32455 C88.157452,11.341084 81.224058,9.637032 77.018997,9.7220003 z M72.508321,0 L75.534982,0.00030899048 75.666576,8.0271683 C82.12947,7.2200313 89.856422,9.5029331 98.037563,12.896122 L98.56394,11.711782 100.40626,11.711782 103.95396,13.313193 105.89324,15.036971 108.04801,15.036971 110.13094,17.766288 118.03174,17.766288 118.60635,18.915473 120.54488,18.450748 125.86071,18.556353 126.86654,19.633714 126.86627,22.434855 125.64524,23.440392 122.34127,23.440392 121.40754,22.650327 117.74444,22.937623 95.537279,23.818082 95.537279,24.476047 117.38189,24.344456 118.67817,25.307819 C118.14814,26.602111 117.92438,28.151398 118.03174,29.976386 L117.09801,30.981924 114.87142,31.197396 113.21944,29.832738 99.35713,35.004074 C98.187084,32.084348 95.334906,31.053748 93.251968,30.622803 92.102761,30.9101 91.959111,31.628341 92.318238,32.705702 L93.611501,33.854888 91.815858,37.589742 89.301957,38.307983 85.20752,36.584204 C82.543724,38.676664 81.06212,41.932798 81.472598,45.059449 L77.881326,47.070524 61.936081,46.926876 60.643223,48.076702 C54.897189,48.363698 48.417336,46.187504 46.057917,44.346638 L47.900232,42.504333 C49.293686,41.063885 51.850714,36.710556 55.137907,30.529341 L55.137907,28.292255 52.769213,26.449947 25.134468,24.476047 25.002861,26.97632 C17.367966,29.83593 10.931625,33.123678 6.4481049,37.109007 L1.7107162,36.845819 0.78956604,34.082359 1.8423157,33.161207 C2.0402679,28.08865 1.8258133,21.884501 1.3159409,14.869733 L0.1315918,13.553802 0,10.703572 C2.8123398,9.2676212 4.7464676,8.8127198 5.3307724,9.8657155 L6.7112961,11.974682 13.027813,12.632649 13.422592,14.343363 C28.328918,14.909167 43.668655,12.928808 59.348915,8.9480348 L58.17083,6.5351489 61.322824,4.3422694 63.428332,4.2106771 65.00746,5.5266089 72.245131,5.5266089 z</Geometry>
+    <Geometry x:Key="Geometry.Weapon.Launcher">M112.603991154829,64.4359613959675L98.8335284750549,64.61027043934 98.8335284750556,72.1055593043384 121.319000244141,72.5134682295486 121.145164209372,68.4450693935262C116.332394717868,67.8753917290768,113.383472415588,66.5787529171715,112.603991154829,64.4359613959675z M253.330093383789,9.7610029814407L209.345849221595,9.52812812736293C208.883040835434,13.2618925580586,210.187096946356,15.6875935659491,213.35498046875,16.7334465620681L237.235393889491,17.0234435025144 240.779693603516,14.4093613264724 253.271882073531,14.4087986042055z M261.368815253178,0.803859059750599L275.060588845325,0.464403998361915 274.712219238281,10.6906790373489C278.132761282258,11.335121247042,279.731156441473,13.1625974299882,279.360290527344,16.2686218855545L279.825103759766,42.76368948199C278.96269643334,46.0230894371249,276.334594003651,47.8572826372273,271.458251953125,47.8767761824295L271.458251953125,60.8918938276931 290.516082763672,60.8918938276931 283.543701171875,77.1607994673416 252.400390625,77.1607994673416 252.415512084961,114.811686002986 259.372772216797,119.924768888728 259.372772216797,124.57302328326 239.385269165039,124.108194792049 239.385269165039,77.625620329158 194.761993408203,78.0904488203689 192.902694702148,72.5125374434158 146.88493347168,72.5125374434158C146.356125167837,77.9071163451827,143.487174837826,80.9291419196582,137.588424682617,80.8794045088455L95.2892837524414,79.9497551558181 86.9224166870117,99.937258207576 91.570671081543,105.515169584529C91.7029455384368,109.684965928629,90.2579864263924,112.13671397338,86.4575881958008,112.02273031451L51.5956611633301,96.218653166072C50.4334466537861,91.4154444319451,51.362994407516,88.9362601109828,54.3846130371094,88.7814430830642L66.470085144043,89.7110924360916 79.4852066040039,67.3994545576736C78.439298936656,61.9956347887586 74.4301768906459,62.5185619188748 74.8368988037109,58.5677666304275 74.2411945222131,54.5642910479821 79.5650001721511,52.7105776358646 86.9223709106445,51.5953850386306L83.2037658691406,41.3692116377517 43.2287483215332,41.8340439436599 26.0301971435547,65.075327360408 0,65.075327360408 0.465045720338821,12.0855135557815 30.213695526123,11.6206535933181 39.5102157592773,19.5226959822342 101.796905517578,19.5226959822342 105.980346679688,15.804087126033 145.025741577148,16.2689118025467 157.576034545898,1.85930415369717 162.456552248693,3.95021901097109 206.382585100631,3.9502190109711 259.372719969634,4.47314799063284z</Geometry>
+    <Geometry x:Key="Geometry.Skull">M2.3146858,16.264007 C2.7004666,16.263286 3.086247,16.31677 3.4720275,16.426628 4.0749764,16.816313 4.5068576,17.316175 4.6526277,18.000311 L14.169504,21.054365 23.686379,18.000311 C24.305294,17.815483 24.279012,16.708491 24.866981,16.426628 25.638541,16.206913 26.410102,16.212688 27.181663,16.426628 27.631105,16.854567 28.078177,17.45188 27.684962,18.324742 27.699559,18.836131 27.694013,19.107393 28.269563,19.111435 L28.339007,20.569786 C27.967929,21.467956 27.445752,21.764333 26.81087,21.611841 25.858281,21.738395 25.283626,20.36145 23.894532,20.222561 L17.407189,22.445113 25.1394,24.574705 C25.844638,24.775455 26.537993,24.664909 27.222404,24.319969 28.043319,24.326477 28.388024,24.888752 28.333413,25.917051 L27.91686,26.88965 C28.156072,27.504997 28.174504,28.065023 27.91686,28.555877 27.267373,29.102026 26.350456,29.098041 25.509012,28.787706 24.645349,28.230777 25.184966,27.583999 24.444613,27.028196 L14.169503,23.531788 3.894393,27.028196 C3.1540408,27.583999 3.5080473,28.415848 2.6443844,28.972776 1.8029413,29.283111 1.0716352,29.102026 0.4221468,28.555877 0.1645031,28.065023 -0.14684164,27.782683 0.092370391,27.167336 L-0.60207421,25.824743 C-0.65668589,24.796444 0.29568911,24.326477 1.1166048,24.319969 1.8010139,24.664909 2.4943695,24.775455 3.1996078,24.574705 L10.740521,22.398817 4.4444749,20.222561 C3.0553818,20.36145 2.4807267,21.738395 1.5281363,21.611841 0.89325619,21.764333 0.37107849,21.467956 0,20.569786 -0.1507552,20.087854 -0.11217843,19.601366 0.069444656,19.111435 0.64499426,19.107393 1.0270762,18.928371 1.0416737,18.416982 0.80766296,17.77351 0.88333368,17.107338 1.1573443,16.426628 1.5431252,16.319658 1.9289055,16.264728 2.3146858,16.264007 z M17.332813,6.7037089 C16.960208,6.6984613 16.763094,6.8010585 16.319289,7.0830247 16.220841,7.6765787 16.242983,8.2693157 16.368541,8.8613521 17.294423,9.0754482 18.059774,9.0727232 18.491867,8.8113477 18.57342,8.2246654 18.579173,7.6379831 18.491867,7.0513008 18.216161,6.832618 17.661583,6.708339 17.332813,6.7037089 z M11.732777,6.5920923 C11.360171,6.5868447 10.952774,6.7219436 10.508968,7.0039103 10.467346,7.6145383 10.489589,8.203064 10.602072,8.7603595 11.527953,8.9744566 12.307939,8.9507244 12.740031,8.6893489 12.848737,8.1026665 12.858678,7.515984 12.740031,6.9293015 12.464324,6.7106187 12.061547,6.5967224 11.732777,6.5920923 z M14.883924,1.5510328E-05 C16.276352,0.0018833897 17.6414,0.17260222 18.977604,0.52121163 20.279722,0.8185208 20.986708,1.6125053 21.064624,2.9314857 L21.157215,7.1874764 C21.9032,7.5784338 22.130122,8.2300155 21.712764,9.205097 20.972143,12.008718 19.305496,10.955818 18.817524,12.362647 L18.74991,17.364174 C15.972165,19.465843 13.194421,19.594232 10.416676,17.469875 L10.416602,12.840282 C9.6758106,11.199496 7.2683972,11.56134 7.0833083,9.5307872 6.8529573,8.1603019 7.1158431,7.4955289 7.8240399,7.4678991 L7.8241884,2.9308996 C8.3766848,1.7320289 9.1225638,0.9773211 10.04631,0.63114173 11.692591,0.21265964 13.305841,-0.0021022057 14.883924,1.5510328E-05 z</Geometry>
+    <Geometry x:Key="Geometry.Clock">M10.499714,2.5168121L10.499714,5 9.4997139,5 9.4997139,2.5168726 9.4499445,2.5198784C5.7552838,2.7877853,2.8027711,5.7319665,2.5219233,9.4229469L2.5170405,9.5 4.4640002,9.5 4.4640002,10.5 2.5170405,10.5 2.5219233,10.577053C2.8027711,14.268034,5.7552838,17.212215,9.4499445,17.480122L9.4997139,17.483128 9.4997139,15 10.499714,15 10.499714,17.483189 10.550484,17.480122C14.245145,17.212215,17.197659,14.268034,17.478506,10.577053L17.483389,10.5 15.535429,10.5 15.535429,9.5 17.483389,9.5 17.478506,9.4229469C17.197659,5.7319665,14.245145,2.7877853,10.550484,2.5198784z M10.000215,1.24851095888362E-17C15.52318,-8.63309418751489E-09 20.000429,4.4771523 20.000429,10 20.000429,15.522847 15.52318,20 10.000215,20 4.4772482,20 0,15.522847 0,10 0,4.4771523 4.4772482,-8.63309418751489E-09 10.000215,1.24851095888362E-17z M10.4998457895671,5.49998294971629L10.5002581099057,9.5187532835224 12.1332165275333,8.33233954665159 12.7210566871283,9.14143211444496 10.2943027065693,10.9045720863274 10.2799666553421,10.9146700455893C10.200175399112,10.9685751146578 10.1039823632312,11.0000458043318 10.0004339587678,11.0000352615572 9.72430472836726,11.0000069385138 9.50043493043767,10.7761220695067 9.50040650150983,10.4999746066227L9.49989364711633,5.49988035197455z</Geometry>
+    <ControlTemplate x:Key="Template.HealthBar" TargetType="{x:Type ProgressBar}">
+        <Grid x:Name="TemplateRoot">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualStateGroup.Transitions>
+                        <VisualTransition GeneratedDuration="0" To="Determinate"/>
+                    </VisualStateGroup.Transitions>
+                    <VisualState x:Name="Determinate">
+                        <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Opacity)" Storyboard.TargetName="Indicator">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0.6"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
+                                    <EasingDoubleKeyFrame.EasingFunction>
+                                        <CubicEase EasingMode="EaseIn"/>
+                                    </EasingDoubleKeyFrame.EasingFunction>
+                                </EasingDoubleKeyFrame>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Indeterminate"/>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Viewbox Stretch="Fill" Grid.RowSpan="2">
+                <Grid x:Name="PART_Track" Grid.RowSpan="1" Height="85" VerticalAlignment="Top" Width="600">
+                    <Path Data="M2.9999999,86.034547 L32.870167,52.8115 301.98475,2.9999999 571.12538,52.844703 601.04725,86.054469 301.98475,52.804687 z" StrokeThickness="6" Stretch="None" Height="Auto" Margin="-2.016,-2.024,-2.031,-2.03" StrokeLineJoin="Round">
+                        <Path.Stroke>
+                            <SolidColorBrush Color="{StaticResource Color.PrimaryShade0}" Opacity="0.1"/>
+                        </Path.Stroke>
+                    </Path>
+                    <Path Data="M0,10L5,6 50,0 95,6 100,10 50,6z" Stroke="Transparent" StrokeThickness="2" Stretch="Fill">
+                        <Path.Fill>
+                            <RadialGradientBrush Center="0.501,2.342" GradientOrigin="0.501,2.342" RadiusY="3.204" RadiusX="0.999" Opacity="0.2">
+                                <RadialGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="1.886" CenterX="0.501" ScaleY="1" ScaleX="1"/>
+                                        <SkewTransform AngleY="0" AngleX="0" CenterY="1.886" CenterX="0.501"/>
+                                        <RotateTransform Angle="0.025" CenterY="1.886" CenterX="0.501"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </RadialGradientBrush.RelativeTransform>
+                                <GradientStop Color="{StaticResource Color.SecondaryShade75}" Offset="0.395"/>
+                                <GradientStop Color="{StaticResource Color.SecondaryShade100}" Offset="0.644"/>
+                                <GradientStop Color="{StaticResource Color.SecondaryShade75}" Offset="1"/>
+                            </RadialGradientBrush>
+                        </Path.Fill>
+                    </Path>
+                    <Grid x:Name="PART_Indicator" HorizontalAlignment="Left" Clip="M3.4375,82.755469 L31.40625,51.677344 300.01562,1.9722656 568.625,51.677344 596.5625,82.755469 300.03125,49.824609 z">
+                        <Path x:Name="Indicator" Data="M2,79.909281 L24.027158,51.487406 283.09544,1.9999999 559.15918,51.567094 591.55275,79.988969 291.01585,45.929203 z" Stroke="{StaticResource Brush.Secondary}" StrokeThickness="4" StrokeLineJoin="Round" Stretch="None" Margin="6.06,1.905,0,1.106" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleX="-10"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="4"/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                            <Path.Fill>
+                                <SolidColorBrush Color="{StaticResource Color.Secondary}"/>
+                            </Path.Fill>
+                        </Path>
+                    </Grid>
+                    <Path Data="M0,10L5,6 50,0 95,6 100,10 50,6z" StrokeThickness="2" StrokeLineJoin="Round" Stretch="Fill" Visibility="Visible">
+                        <Path.Stroke>
+                            <SolidColorBrush Color="{StaticResource Color.PrimaryShade25}" Opacity="0.75"/>
+                        </Path.Stroke>
+                    </Path>
+                </Grid>
+            </Viewbox>
+            <Viewbox HorizontalAlignment="Center" Stretch="Uniform" Grid.Row="1" Grid.RowSpan="2">
+                <TextBlock Text="{Binding Value, RelativeSource={RelativeSource TemplatedParent}, StringFormat=F0}" FontSize="40" Margin="0,4,0,-4"/>
+            </Viewbox>
+        </Grid>
+    </ControlTemplate>
+    <Style x:Key="Style.HealthBar" TargetType="{x:Type ProgressBar}">
+        <Setter Property="Foreground" Value="{StaticResource Brush.Primary}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template" Value="{StaticResource Template.HealthBar}"/>
+    </Style>
+    <Style x:Key="Style.Weapon" TargetType="Path">
+        <Setter Property="Data" Value="{StaticResource Geometry.Weapon.Gun}"/>
+        <Setter Property="Fill">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource Color.Primary}" Opacity="0.8"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Stroke">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource Color.Secondary}" Opacity="0.9"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RenderTransformOrigin" Value="0,0.5"/>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Setter.Value>
+        </Setter>
+        <Style.Resources>
+            <Storyboard x:Key="ShowWeapon">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.Children[3].X">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="-50"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="10"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+        </Style.Resources>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <BeginStoryboard Storyboard="{StaticResource ShowWeapon}"/>
+            </EventTrigger>
+            <DataTrigger Binding="{Binding PrimaryWeapon.Name}" Value="WeapGun_C">
+                <Setter Property="Data" Value="{StaticResource Geometry.Weapon.Gun}"/>
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource ShowWeapon}"/>
+                </DataTrigger.EnterActions>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding PrimaryWeapon.Name}" Value="WeapLauncher_C">
+                <Setter Property="Data" Value="{StaticResource Geometry.Weapon.Launcher}"/>
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource ShowWeapon}"/>
+                </DataTrigger.EnterActions>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <DataTemplate x:Key="Template.Ammo.Gun">
+        <Border BorderThickness="1" Margin="1" Opacity="{Binding FallbackValue=1}">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{StaticResource Color.SecondaryShade25}" Opacity="0.6"/>
+            </Border.BorderBrush>
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource Color.Secondary}" Opacity="0.8"/>
+            </Border.Background>
+            <Rectangle StrokeThickness="1" Height="40" Width="20">
+                <Rectangle.Stroke>
+                    <SolidColorBrush Color="{StaticResource Color.SecondaryShade75}" Opacity="0.5"/>
+                </Rectangle.Stroke>
+            </Rectangle>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="Template.DeathMessage">
+        <DataTemplate.Resources>
+            <Storyboard x:Key="OnMsgAdded">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Message">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <SineEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:5" Value="1"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:5.3" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <SineEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="Message">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="-4"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="4">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <QuadraticEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="Message">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:5" Value="1"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:5.3" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <SineEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+        </DataTemplate.Resources>
+        <StackPanel x:Name="Message" Orientation="Horizontal" TextElement.FontFamily="Fonts/#Saira" TextElement.FontWeight="Regular" TextElement.FontSize="12" RenderTransformOrigin="0.5,0.5">
+            <StackPanel.LayoutTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </StackPanel.LayoutTransform>
+            <StackPanel.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </StackPanel.RenderTransform>
+            <TextBlock Text="   > " VerticalAlignment="Center" Foreground="{StaticResource Brush.Primary}"/>
+            <TextBlock Text="{Binding KillerDesc}" VerticalAlignment="Center">
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="{Binding KillerColor}"/>
+                </TextBlock.Foreground>
+            </TextBlock>
+            <TextBlock Text=" used  " VerticalAlignment="Center" Foreground="{StaticResource Brush.Primary}"/>
+            <Path x:Name="DamageType" Data="{StaticResource Geometry.Weapon.Gun}" Fill="{StaticResource Brush.Primary}" Height="14" Stretch="Uniform" VerticalAlignment="Center"/>
+            <TextBlock Text="  to kill " VerticalAlignment="Center" Foreground="{StaticResource Brush.Primary}"/>
+            <TextBlock Text="{Binding VictimDesc}" VerticalAlignment="Center">
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="{Binding VictimColor}"/>
+                </TextBlock.Foreground>
+            </TextBlock>
+        </StackPanel>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding DamageTypeIconName}" Value="DmgType_Explosion_C_Icon">
+                <Setter TargetName="DamageType" Property="Data" Value="{StaticResource Geometry.Weapon.Launcher}"/>
+            </DataTrigger>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <BeginStoryboard Storyboard="{StaticResource OnMsgAdded}"/>
+            </EventTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+    <Storyboard x:Key="OnShowHit">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(Brush.Opacity)" Storyboard.TargetName="CrosshairHit">
+            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.8">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0.8"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="CrosshairHit">
+            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <CircleEase EasingMode="EaseIn"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="CrosshairHit">
+            <EasingDoubleKeyFrame KeyTime="0" Value="0.8"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <BackEase EasingMode="EaseOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="CrosshairHit">
+            <EasingDoubleKeyFrame KeyTime="0" Value="0.8"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <BackEase EasingMode="EaseOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+    <ControlTemplate x:Key="Template.Crosshair.Gun" TargetType="Control">
+        <Grid>
+            <Ellipse x:Name="CenterDot" HorizontalAlignment="Center" VerticalAlignment="Center"
+                     Width="2" Height="2" Fill="{StaticResource Brush.Secondary}"/>
+            <Grid x:Name="OuterLines" Margin="-300">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Path Data="M0.5,7.7548089 C13.833333,-1.9747357 27.166667,-1.8616383 40.5,7.7548089" Stroke="{StaticResource Brush.Primary}"/>
+                    <Decorator Height="{Binding CrosshairOffset}" Margin="0,0,0,24"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Decorator Height="{Binding CrosshairOffset}" Margin="0,24,0,0"/>
+                    <Path Data="M0.5,0.5 C13.833333,10.235255 27.166667,10.105066 40.5,0.5" Stroke="{StaticResource Brush.Primary}"/>
+                </StackPanel>
+                <StackPanel Grid.RowSpan="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+                    <Path Data="M7.7641208,0.5 C-1.9644239,13.833333 -1.8782274,27.166667 7.7641208,40.5" Stroke="{StaticResource Brush.Primary}"/>
+                    <Decorator Width="{Binding CrosshairOffset}" Margin="0,0,24,0"/>
+                </StackPanel>
+                <StackPanel Grid.RowSpan="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <Decorator Width="{Binding CrosshairOffset}" Margin="24,0,0,0"/>
+                    <Path Data="M0.5,0.5 C10.016349,13.833333 10.316984,27.166667 0.5,40.5" Stroke="{StaticResource Brush.Primary}"/>
+                </StackPanel>
+            </Grid>
+            <Path x:Name="CrosshairHit" Data="M30,30L40,40M40,50L30,60M50,40L60,30M50,50L60,60" RenderTransformOrigin="0.5,0.5">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+                <Path.Stroke>
+                    <SolidColorBrush Color="{StaticResource Color.SecondaryShade75}" Opacity="0"/>
+                </Path.Stroke>
+            </Path>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding ShowCrosshairHit}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource OnShowHit}"/>
+                </DataTrigger.EnterActions>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsAiming}" Value="True">
+                <Setter TargetName="OuterLines" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="CenterDot" Property="Width" Value="6"/>
+                <Setter TargetName="CenterDot" Property="Height" Value="6"/>
+                <Setter TargetName="CenterDot" Property="Fill" Value="{StaticResource Brush.Blood}"/>
+            </DataTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="Template.Crosshair.Launcher" TargetType="Control">
+        <Grid>
+            <Ellipse HorizontalAlignment="Center" VerticalAlignment="Center"
+                     Width="8" Height="8" Stroke="{StaticResource Brush.SecondaryShade75}"/>
+            <Grid x:Name="OuterLines" Margin="-300">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Path Data="M0,8 L8,0 48,0 56,8" Stroke="{StaticResource Brush.Primary}"/>
+                    <Decorator Height="{Binding CrosshairOffset}" Margin="0,0,0,32"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Decorator Height="{Binding CrosshairOffset}" Margin="0,32,0,0"/>
+                    <Path Data="M0,0L8,8 48,8 56,0" Stroke="{StaticResource Brush.Primary}"/>
+                </StackPanel>
+                <StackPanel Grid.RowSpan="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+                    <Path Data="M8,0 L0,8 0,48 8,56" Stroke="{StaticResource Brush.Primary}"/>
+                    <Decorator Width="{Binding CrosshairOffset}" Margin="0,0,32,0"/>
+                </StackPanel>
+                <StackPanel Grid.RowSpan="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <Decorator Width="{Binding CrosshairOffset}" Margin="32,0,0,0"/>
+                    <Path Data="M0,0L8,8 8,48 0,56" Stroke="{StaticResource Brush.Primary}"/>
+                </StackPanel>
+            </Grid>
+            <Path x:Name="CrosshairHit" Data="M25,25L35,35M35,55L25,65M55,35L65,25M55,55L65,65" RenderTransformOrigin="0.5,0.5">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+                <Path.Stroke>
+                    <SolidColorBrush Color="{StaticResource Color.SecondaryShade75}" Opacity="0"/>
+                </Path.Stroke>
+            </Path>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding ShowCrosshairHit}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource OnShowHit}"/>
+                </DataTrigger.EnterActions>
+            </DataTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style x:Key="Style.Crosshair" TargetType="Control">
+        <Setter Property="Template" Value="{StaticResource Template.Crosshair.Gun}"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding PrimaryWeapon.Name}" Value="WeapLauncher_C">
+                <Setter Property="Template" Value="{StaticResource Template.Crosshair.Launcher}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="Style.DamageIndicator" TargetType="Ellipse">
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.8"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.7"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="Style.LowHealthIndicator" TargetType="Grid">
+        <Setter Property="Background">
+            <Setter.Value>
+                <RadialGradientBrush Opacity="0">
+                    <GradientStop Color="{StaticResource Color.BloodVivid.Transparent}" Offset="0.5"/>
+                    <GradientStop Color="{StaticResource Color.BloodDark}" Offset="1"/>
+                </RadialGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Background.Opacity">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.2"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0.15"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.25"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Background.Opacity" To="0" Duration="0:0:2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="Style.RecentlyKill" TargetType="Grid">
+        <Style.Resources>
+            <Storyboard x:Key="OnShowRecentlyKill">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="1"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0.5"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1.1"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0.5"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1.1"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.Children[3].Y">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2" Value="-10">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <CircleEase EasingMode="EaseIn"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+        </Style.Resources>
+        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource OnShowRecentlyKill}"/>
+                </Trigger.EnterActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
