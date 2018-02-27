@@ -36,4 +36,4 @@ This is a modified version of Epic's ShooterGame tutorial in which we've replace
 
 * `ShooterEntry - Level Blueprint`: It has a `GameMode` override to use `Blueprint'/Game/Blueprints/Noesis/ShooterGame_Menu_Noesis.ShooterGame_Menu_Noesis'`.
 
-![ShooterEntry - Level Blueprint](https://noesis.github.io/NoesisGUI/Samples/Login/UE4/ShooterEntry-LevelBlueprint.PNG)
+![ShooterEntry - Level Blueprint](https://noesis.github.io/NoesisGUI/Samples/ShooterGame/UE4/ShooterEntry-LevelBlueprint.PNG)
