@@ -205,7 +205,7 @@
                     <DiscreteObjectKeyFrame KeyTime="0" Value="Selected"/>
                 </ObjectAnimationUsingKeyFrames>
             </Storyboard>
-            <Storyboard x:Key="OnMainHide">
+            <Storyboard x:Key="OnMainHide" noesis:EventToCommand.Event="Completed" noesis:EventToCommand.Command="{Binding HideMenu}">
                 <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="MainPanel">
                     <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Null}"/>
                 </ObjectAnimationUsingKeyFrames>
