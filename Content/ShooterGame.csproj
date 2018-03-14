@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="NoesisGUIExtensions.cs" />
     <Compile Include="SampleData\MainMenuSampleData\MainMenuSampleData.xaml.cs">
       <DependentUpon>MainMenuSampleData.xaml</DependentUpon>
     </Compile>
@@ -63,7 +64,6 @@
     <Compile Include="SampleData\HUDSampleData\HUDSampleData.xaml.cs">
       <DependentUpon>HUDSampleData.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Text.cs" />
     <Page Include="GameMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,7 +80,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Element.cs" />
     <Page Include="HUDResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
