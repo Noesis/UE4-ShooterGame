@@ -294,7 +294,7 @@ private:
 	/** A hard-coded encryption key used to try out the encryption code. This is NOT SECURE, do not use this technique in production! */
 	TArray<uint8> DebugTestEncryptionKey;
 
-	void HandleNetworkConnectionStatusChanged(  EOnlineServerConnectionStatus::Type LastConnectionStatus, EOnlineServerConnectionStatus::Type ConnectionStatus );
+	void HandleNetworkConnectionStatusChanged( const FString&, EOnlineServerConnectionStatus::Type LastConnectionStatus, EOnlineServerConnectionStatus::Type ConnectionStatus );
 
 	void HandleSessionFailure( const FUniqueNetId& NetId, ESessionFailure::Type FailureType );
 	

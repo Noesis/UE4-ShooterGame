@@ -12,15 +12,12 @@ struct FShooterGameLoadingScreenBrush : public FSlateDynamicImageBrush, public F
 	FShooterGameLoadingScreenBrush( const FName InTextureName, const FVector2D& InImageSize )
 		: FSlateDynamicImageBrush( InTextureName, InImageSize )
 	{
-		ResourceObject = LoadObject<UObject>( NULL, *InTextureName.ToString() );
+		SetResourceObject(LoadObject<UObject>( NULL, *InTextureName.ToString() ));
 	}
 
-	virtual void AddReferencedObjects(FReferenceCollector& Collector)
+	virtual void AddReferencedObjects(FReferenceCollector& Collector) override
 	{
-		if( ResourceObject )
-		{
-			Collector.AddReferencedObject(ResourceObject);
-		}
+		FSlateBrush::AddReferencedObjects(Collector);
 	}
 };
 

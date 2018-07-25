@@ -586,7 +586,7 @@ void SShooterSplitScreenLobby::OnFocusLost( const FFocusEvent& InFocusEvent )
 {
 }
 
-void SShooterSplitScreenLobby::HandleLoginUIClosedAndReady( TSharedPtr<const FUniqueNetId> UniqueId, const int UserIndex )
+void SShooterSplitScreenLobby::HandleLoginUIClosedAndReady( TSharedPtr<const FUniqueNetId> UniqueId, const int UserIndex, const FOnlineError& )
 {
 	const UShooterGameInstance* GameInstance = GetGameInstance();
 	if (GameInstance == nullptr)

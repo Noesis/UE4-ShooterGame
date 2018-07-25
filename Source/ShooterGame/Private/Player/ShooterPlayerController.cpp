@@ -446,7 +446,7 @@ void AShooterPlayerController::UpdateAchievementProgress( const FString& Id, flo
 			IOnlineIdentityPtr Identity = OnlineSub->GetIdentityInterface();
 			if (Identity.IsValid())
 			{
-				TSharedPtr<const FUniqueNetId> UserId = LocalPlayer->GetCachedUniqueNetId();
+				FUniqueNetIdRepl UserId = LocalPlayer->GetCachedUniqueNetId();
 
 				if (UserId.IsValid())
 				{
@@ -992,7 +992,7 @@ bool AShooterPlayerController::SetPause(bool bPause, FCanUnpause CanUnpauseDeleg
 	const auto PresenceInterface = Online::GetPresenceInterface();
 	const auto Events = Online::GetEventsInterface();
 	const auto LocalPlayer = Cast<ULocalPlayer>(Player);
-	TSharedPtr<const FUniqueNetId> UserId = LocalPlayer ? LocalPlayer->GetCachedUniqueNetId() : nullptr;
+	FUniqueNetIdRepl UserId = LocalPlayer ? LocalPlayer->GetCachedUniqueNetId() : FUniqueNetIdRepl();
 
 	if(PresenceInterface.IsValid() && UserId.IsValid())
 	{

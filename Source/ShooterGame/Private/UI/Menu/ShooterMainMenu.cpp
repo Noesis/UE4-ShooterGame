@@ -592,7 +592,7 @@ void FShooterMainMenu::BeginQuickMatchSearch()
 		auto PlayerId = GameInstance->GetLocalPlayerByIndex(i)->GetPreferredUniqueNetId();
 		if (PlayerId.IsValid())
 		{
-			LocalPlayerIds.Add(PlayerId.ToSharedRef());
+			LocalPlayerIds.Add(PlayerId.GetUniqueNetId().ToSharedRef());
 		}
 	}
 
@@ -716,7 +716,7 @@ void FShooterMainMenu::StartOnlinePrivilegeTask(const IOnlineIdentity::FOnGetUse
 		TSharedPtr<const FUniqueNetId> UserId;
 		if (PlayerOwner.IsValid())
 		{
-			UserId = PlayerOwner->GetPreferredUniqueNetId();
+			UserId = PlayerOwner->GetPreferredUniqueNetId().GetUniqueNetId();
 		}
 		GameInstance->StartOnlinePrivilegeTask(Delegate, EUserPrivileges::CanPlayOnline, UserId);
 	}	

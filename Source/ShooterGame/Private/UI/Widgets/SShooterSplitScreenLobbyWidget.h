@@ -47,7 +47,7 @@ private:
 
 	virtual void Tick( const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime ) override;
 
-	void HandleLoginUIClosedAndReady(TSharedPtr<const FUniqueNetId> UniqueId, const int UserIndex);
+	void HandleLoginUIClosedAndReady(TSharedPtr<const FUniqueNetId> UniqueId, const int UserIndex, const FOnlineError&);
 
 	UShooterGameInstance* GetGameInstance() const;
 

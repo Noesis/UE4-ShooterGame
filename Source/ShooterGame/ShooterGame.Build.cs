@@ -8,7 +8,7 @@ public class ShooterGame : ModuleRules
 	{
 		PrivateIncludePaths.AddRange(
 			new string[] { 
-				"ShooterGame/Classes/Player",
+				"ShooterGame/Private/Player",
 				"ShooterGame/Private",
 				"ShooterGame/Private/UI",
 				"ShooterGame/Private/UI/Menu",
@@ -27,6 +27,7 @@ public class ShooterGame : ModuleRules
 				"AssetRegistry",
                 "AIModule",
 				"GameplayTasks",
+				"NavigationSystem"
 			}
 		);
 

@@ -10,7 +10,6 @@ class UShooterGameUserSettings : public UGameUserSettings
 	GENERATED_UCLASS_BODY()
 
 	/** Applies all current user settings to the game and saves to permanent storage (e.g. file), optionally checking for command line overrides. */
-	UFUNCTION(BlueprintCallable)
 	virtual void ApplySettings(bool bCheckForCommandLineOverrides) override;
 
 	UFUNCTION(BlueprintCallable)
@@ -50,7 +49,6 @@ class UShooterGameUserSettings : public UGameUserSettings
 	}
 
 	// interface UGameUserSettings
-	UFUNCTION(BlueprintCallable)
 	virtual void SetToDefaults() override;
 
 private:

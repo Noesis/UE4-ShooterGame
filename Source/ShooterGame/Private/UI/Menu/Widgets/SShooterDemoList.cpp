@@ -96,13 +96,13 @@ void SShooterDemoList::Construct(const FArguments& InArgs)
 	BuildDemoList();
 }
 
-void SShooterDemoList::OnEnumerateStreamsComplete(const TArray<FNetworkReplayStreamInfo>& Streams)
+void SShooterDemoList::OnEnumerateStreamsComplete(const FEnumerateStreamsResult &Result)
 {
 	check(bUpdatingDemoList); // should not be called otherwise
 
 	bool bFinished = true;
 
-	for ( const auto& StreamInfo : Streams )
+	for ( const auto& StreamInfo : Result.FoundStreams )
 	{
 		float SizeInKilobytes = StreamInfo.SizeInBytes / 1024.0f;
 
@@ -185,7 +185,7 @@ void SShooterDemoList::BuildDemoList()
 
 	if ( ReplayStreamer.IsValid() )
 	{
-		ReplayStreamer->EnumerateStreams(EnumerateStreamsVersion, FString(), FString(), FOnEnumerateStreamsComplete::CreateSP(this, &SShooterDemoList::OnEnumerateStreamsComplete));
+		ReplayStreamer->EnumerateStreams(EnumerateStreamsVersion, FString(), FString(), FEnumerateStreamsCallback::CreateSP(this, &SShooterDemoList::OnEnumerateStreamsComplete));
 	}
 }
 
@@ -265,7 +265,7 @@ FReply SShooterDemoList::OnDemoDeleteConfirm()
 		bUpdatingDemoList = true;
 		DemoList.Empty();
 
-		ReplayStreamer->DeleteFinishedStream(SelectedItem->StreamInfo.Name, FOnDeleteFinishedStreamComplete::CreateSP(this, &SShooterDemoList::OnDeleteFinishedStreamComplete));
+		ReplayStreamer->DeleteFinishedStream(SelectedItem->StreamInfo.Name, FDeleteFinishedStreamCallback::CreateSP(this, &SShooterDemoList::OnDeleteFinishedStreamComplete));
 	}
 
 	UShooterGameInstance* const GI = Cast<UShooterGameInstance>(PlayerOwner->GetGameInstance());
@@ -300,7 +300,7 @@ FReply SShooterDemoList::OnDemoDeleteCancel()
 	return FReply::Handled();
 }
 
-void SShooterDemoList::OnDeleteFinishedStreamComplete(bool bWasSuccessful)
+void SShooterDemoList::OnDeleteFinishedStreamComplete(const FDeleteFinishedStreamResult&)
 {
 	BuildDemoList();
 }

@@ -175,7 +175,7 @@ private:
 	bool ProfileUISwap(const int ControllerIndex) const; 
 
 	/** delegate for if the profile is swapped */
-	void HandleProfileUISwapClosed(TSharedPtr<const FUniqueNetId> UniqueId, const int ControllerIndex);
+	void HandleProfileUISwapClosed(TSharedPtr<const FUniqueNetId> UniqueId, const int ControllerIndex, const FOnlineError&);
 
 	/** this function starts the entire fade in process */
 	void FadeIn();

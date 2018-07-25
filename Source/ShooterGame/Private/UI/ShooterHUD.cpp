@@ -847,7 +847,7 @@ void AShooterHUD::ShowDeathMessage(class AShooterPlayerState* KillerPlayerState,
 			NewMessage.bKillerIsOwner = MyPlayerState == KillerPlayerState;
 			NewMessage.bVictimIsOwner = MyPlayerState == VictimPlayerState;
 
-			NewMessage.DamageType = Cast<const UShooterDamageType>(KillerDamageType);
+			NewMessage.DamageType = Cast<UShooterDamageType>((UDamageType*)KillerDamageType);
 			NewMessage.HideTime = GetWorld()->GetTimeSeconds() + MessageDuration;
 
 			DeathMessages.Add(NewMessage);

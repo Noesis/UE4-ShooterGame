@@ -171,7 +171,6 @@ public:
 
 	virtual bool SetPause(bool bPause, FCanUnpause CanUnpauseDelegate = FCanUnpause()) override;
 
-	UFUNCTION(BlueprintCallable, Category = "Pawn")
 	virtual FVector GetFocalLocation() const override;
 
 	// End APlayerController interface

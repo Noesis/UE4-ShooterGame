@@ -99,7 +99,7 @@ class SShooterWelcomeMenuWidget : public SCompoundWidget
 		const FKey Key = InKeyEvent.GetKey();
 		if (Key == EKeys::Enter)
 		{
-			MenuOwner->HandleLoginUIClosed(TSharedPtr<const FUniqueNetId>(), 0);
+			MenuOwner->HandleLoginUIClosed(TSharedPtr<const FUniqueNetId>(), 0, FOnlineError());
 		}
 		else if (!MenuOwner->GetControlsLocked() && Key == EKeys::Virtual_Accept)
 		{
@@ -141,7 +141,7 @@ class SShooterWelcomeMenuWidget : public SCompoundWidget
 						TSharedPtr<const FUniqueNetId> UserId = IdentityInterface->GetUniquePlayerId(InKeyEvent.GetUserIndex());
 						// If we couldn't show the external login UI for any reason, or if the user is
 						// already logged in, just advance to the main menu immediately.
-						MenuOwner->HandleLoginUIClosed(UserId, InKeyEvent.GetUserIndex());
+						MenuOwner->HandleLoginUIClosed(UserId, InKeyEvent.GetUserIndex(), FOnlineError());
 					}
 				}
 			}
@@ -185,7 +185,7 @@ void FShooterWelcomeMenu::RemoveFromGameViewport()
 	}
 }
 
-void FShooterWelcomeMenu::HandleLoginUIClosed(TSharedPtr<const FUniqueNetId> UniqueId, const int ControllerIndex)
+void FShooterWelcomeMenu::HandleLoginUIClosed(TSharedPtr<const FUniqueNetId> UniqueId, const int ControllerIndex, const FOnlineError&)
 {
 	if ( !ensure( GameInstance.IsValid() ) )
 	{
@@ -260,7 +260,7 @@ void FShooterWelcomeMenu::SetControllerAndAdvanceToMainMenu(const int Controller
 	if ( NewPlayerOwner != nullptr && ControllerIndex != -1 )
 	{
 		NewPlayerOwner->SetControllerId(ControllerIndex);
-		NewPlayerOwner->SetCachedUniqueNetId(NewPlayerOwner->GetUniqueNetIdFromCachedControllerId());
+		NewPlayerOwner->SetCachedUniqueNetId(NewPlayerOwner->GetUniqueNetIdFromCachedControllerId().GetUniqueNetId());
 
 		// tell gameinstance to transition to main menu
 		GameInstance->GotoState(ShooterGameInstanceState::MainMenu);

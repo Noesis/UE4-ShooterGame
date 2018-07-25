@@ -223,7 +223,7 @@ void AShooterGameMode::RequestFinishAndExitToMainMenu()
 		if (!Controller->IsLocalController())
 		{
 			const FString RemoteReturnReason = NSLOCTEXT("NetworkErrors", "HostHasLeft", "Host has left the game.").ToString();
-			Controller->ClientReturnToMainMenu(RemoteReturnReason);
+			Controller->ClientReturnToMainMenuWithTextReason(FText::FromString(RemoteReturnReason));
 		}
 		else
 		{
@@ -513,7 +513,7 @@ void AShooterGameMode::InitBot(AShooterAIController* AIController, int32 BotNum)
 		if (AIController->PlayerState)
 		{
 			FString BotName = FString::Printf(TEXT("Bot %d"), BotNum);
-			AIController->PlayerState->PlayerName = BotName;
+			AIController->PlayerState->SetPlayerName(BotName);
 		}		
 	}
 }

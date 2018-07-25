@@ -256,7 +256,7 @@ bool SShooterMenuWidget::ProfileUISwap(const int ControllerIndex) const
 	return false;
 }
 
-void SShooterMenuWidget::HandleProfileUISwapClosed(TSharedPtr<const FUniqueNetId> UniqueId, const int ControllerIndex)
+void SShooterMenuWidget::HandleProfileUISwapClosed(TSharedPtr<const FUniqueNetId> UniqueId, const int ControllerIndex, const FOnlineError&)
 {
 	UShooterGameInstance * GameInstance = PlayerOwner.IsValid() ? Cast< UShooterGameInstance >( PlayerOwner->GetGameInstance() ) : nullptr;
 
@@ -270,7 +270,7 @@ void SShooterMenuWidget::HandleProfileUISwapClosed(TSharedPtr<const FUniqueNetId
 	{
 		// If the id is the same, the user picked the existing profile
 		// (use the cached unique net id, since we want to compare to the user that was selected at "press start"
-		const TSharedPtr<const FUniqueNetId> OwnerId = PlayerOwner->GetCachedUniqueNetId();
+		const TSharedPtr<const FUniqueNetId> OwnerId = PlayerOwner->GetCachedUniqueNetId().GetUniqueNetId();
 		if( OwnerId.IsValid() && UniqueId.IsValid() && *OwnerId == *UniqueId)
 		{
 			return;

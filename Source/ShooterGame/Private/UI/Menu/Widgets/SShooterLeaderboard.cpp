@@ -199,7 +199,7 @@ bool SShooterLeaderboard::ProfileUIOpened() const
 	if( IsPlayerSelectedAndValid() )
 	{
 		check( PlayerOwner.IsValid() );
-		const TSharedPtr<const FUniqueNetId> OwnerNetId = PlayerOwner->GetPreferredUniqueNetId();
+		const TSharedPtr<const FUniqueNetId> OwnerNetId = PlayerOwner->GetPreferredUniqueNetId().GetUniqueNetId();
 		check( OwnerNetId.IsValid() );
 
 		const TSharedPtr<const FUniqueNetId>& PlayerId = SelectedItem->PlayerId;

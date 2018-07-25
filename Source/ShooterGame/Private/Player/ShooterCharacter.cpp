@@ -333,7 +333,7 @@ void AShooterCharacter::OnDeath(float KillingDamage, struct FDamageEvent const& 
 	}
 
 	bReplicateMovement = false;
-	bTearOff = true;
+	TearOff();
 	bIsDying = true;
 
 	if (Role == ROLE_Authority)

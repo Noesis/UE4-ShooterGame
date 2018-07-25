@@ -57,7 +57,7 @@ public:
 	void OnBuildDemoListFinished();
 
 	/** Called when we get results from the replay streaming interface */
-	void OnEnumerateStreamsComplete(const TArray<FNetworkReplayStreamInfo>& Streams);
+	void OnEnumerateStreamsComplete(const FEnumerateStreamsResult &Result);
 
 	/** Play chosen demo */
 	void PlayDemo();
@@ -72,7 +72,7 @@ public:
 	FReply OnDemoDeleteCancel();
 
 	/** Called by delegate when the replay streaming interface has finished deleting */
-	void OnDeleteFinishedStreamComplete(bool bWasSuccessful);
+	void OnDeleteFinishedStreamComplete(const FDeleteFinishedStreamResult&);
 
 	/** selects item at current + MoveBy index */
 	void MoveSelection(int32 MoveBy);
