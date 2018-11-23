@@ -134,10 +134,10 @@ bool UBTDecorator_HasLoSTo::LOSTrace(AActor* InActor, AActor* InEnemyActor, cons
 						// Check the team of us against the team of the actor we hit if we are able. If they dont match good to go.
 						ACharacter* HitChar = Cast<ACharacter>(HitActor);
 						if ( (HitChar != NULL)
-							&& (MyController->PlayerState != NULL) && (HitChar->PlayerState != NULL))
+							&& (MyController->GetPlayerState<AShooterPlayerState>() != NULL) && (HitChar->GetPlayerState() != NULL))
 						{
-							AShooterPlayerState* HitPlayerState = Cast<AShooterPlayerState>(HitChar->PlayerState);
-							AShooterPlayerState* MyPlayerState = Cast<AShooterPlayerState>(MyController->PlayerState);
+							AShooterPlayerState* HitPlayerState = Cast<AShooterPlayerState>(HitChar->GetPlayerState());
+							AShooterPlayerState* MyPlayerState = MyController->GetPlayerState<AShooterPlayerState>();
 							if ((HitPlayerState != NULL) && (MyPlayerState != NULL))
 							{
 								if (HitPlayerState->GetTeamNum() != MyPlayerState->GetTeamNum())
