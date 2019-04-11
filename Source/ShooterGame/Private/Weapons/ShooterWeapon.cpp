@@ -722,7 +722,6 @@ FHitResult AShooterWeapon::WeaponTrace(const FVector& StartTrace, const FVector&
 
 	// Perform trace to retrieve hit info
 	FCollisionQueryParams TraceParams(SCENE_QUERY_STAT(WeaponTrace), true, Instigator);
-	TraceParams.bTraceAsyncScene = true;
 	TraceParams.bReturnPhysicalMaterial = true;
 
 	FHitResult Hit(ForceInit);
@@ -844,7 +843,11 @@ void AShooterWeapon::SimulateWeaponFire()
 		}
 		if (FireForceFeedback != NULL && PC->IsVibrationEnabled())
 		{
-			PC->ClientPlayForceFeedback(FireForceFeedback, false, false, "Weapon");
+			FForceFeedbackParameters FFParams;
+			FFParams.bLooping = false;
+			FFParams.bPlayWhilePaused = false;
+			FFParams.Tag = "Weapon";
+			PC->ClientPlayForceFeedback(FireForceFeedback, FFParams);
 		}
 	}
 }

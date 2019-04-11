@@ -23,8 +23,8 @@ public:
 
 	// Begin AController interface
 	virtual void GameHasEnded(class AActor* EndGameFocus = NULL, bool bIsWinner = false) override;
-	virtual void Possess(class APawn* InPawn) override;
-	virtual void UnPossess() override;
+	virtual void OnPossess(class APawn* InPawn) override;
+	virtual void OnUnPossess() override;
 	virtual void BeginInactiveState() override;
 	// End APlayerController interface
 
