@@ -6,10 +6,10 @@ public class ShooterGame : ModuleRules
 {
 	public ShooterGame(ReadOnlyTargetRules Target) : base(Target)
 	{
-        PCHUsage = PCHUsageMode.NoSharedPCHs;
-        PrivatePCHHeaderFile = "Public/ShooterGame.h";
+		PCHUsage = PCHUsageMode.NoSharedPCHs;
+		PrivatePCHHeaderFile = "Public/ShooterGame.h";
 
-        PrivateIncludePaths.AddRange(
+		PrivateIncludePaths.AddRange(
 			new string[] { 
 				"ShooterGame/Private/Player",
 				"ShooterGame/Private",
