@@ -29,7 +29,7 @@ FAutoConsoleCommand CmdPlayGoNext(
 #endif
 
 #endif
-#include "ShooterGameState.h"
+#include "Online/ShooterGameState.h"
 
 
 // respond to requests from a companion app

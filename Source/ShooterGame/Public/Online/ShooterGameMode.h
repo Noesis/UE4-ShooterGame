@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "OnlineIdentityInterface.h"
+#include "Interfaces/OnlineIdentityInterface.h"
 #include "ShooterGameMode.generated.h"
 
 class AShooterAIController;

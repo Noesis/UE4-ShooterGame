@@ -6,7 +6,7 @@
 #include "ShooterStyle.h"
 #include "ShooterOptionsWidgetStyle.h"
 #include "ShooterGameUserSettings.h"
-#include "ShooterPersistentUser.h"
+#include "Player/ShooterPersistentUser.h"
 #include "Player/ShooterLocalPlayer.h"
 
 #define LOCTEXT_NAMESPACE "ShooterGame.HUD.Menu"
@@ -88,7 +88,7 @@ void FShooterRecentlyMet::UpdateRecentlyMet(int32 NewOwnerIndex)
 		{
 			const APlayerState* PlayerState = PlayerArray[i];
 			FString Username = PlayerState->GetHumanReadableName();
-			if (Username != LocalUsername && PlayerState->bIsABot == false)
+			if (Username != LocalUsername && PlayerState->IsABot() == false)
 			{
 				TSharedPtr<FShooterMenuItem> UserItem = MenuHelper::AddMenuItem(RecentlyMetItem, FText::FromString(Username));
 				UserItem->OnControllerDownInputPressed.BindRaw(this, &FShooterRecentlyMet::IncrementRecentlyMetCounter);
@@ -129,7 +129,7 @@ void FShooterRecentlyMet::ViewSelectedUsersProfile()
 	{
 		const APlayerState* PlayerState = PlayerArray[CurrRecentlyMetIndex];
 		TSharedPtr<const FUniqueNetId> Requestor = Identity->GetUniquePlayerId(LocalUserNum);
-		TSharedPtr<const FUniqueNetId> Requestee = PlayerState->UniqueId.GetUniqueNetId();
+		TSharedPtr<const FUniqueNetId> Requestee = PlayerState->GetUniqueId().GetUniqueNetId();
 		auto ExternalUI = Online::GetExternalUIInterface();
 		if (ExternalUI.IsValid() && Requestor.IsValid() && Requestee.IsValid())
 		{

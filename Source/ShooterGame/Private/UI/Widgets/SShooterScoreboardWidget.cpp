@@ -558,10 +558,10 @@ bool SShooterScoreboardWidget::ProfileUIOpened() const
 	if( IsPlayerSelectedAndValid() )
 	{
 		check( PCOwner.IsValid() && PCOwner->PlayerState );
-		const TSharedPtr<const FUniqueNetId>& OwnerNetId = PCOwner->PlayerState->UniqueId.GetUniqueNetId();
+		const TSharedPtr<const FUniqueNetId>& OwnerNetId = PCOwner->PlayerState->GetUniqueId().GetUniqueNetId();
 		check( OwnerNetId.IsValid() );
 
-		const TSharedPtr<const FUniqueNetId>& PlayerId = ( !SelectedPlayer.IsValid() ? OwnerNetId : GetSortedPlayerState(SelectedPlayer)->UniqueId.GetUniqueNetId() );
+		const TSharedPtr<const FUniqueNetId>& PlayerId = ( !SelectedPlayer.IsValid() ? OwnerNetId : GetSortedPlayerState(SelectedPlayer)->GetUniqueId().GetUniqueNetId() );
 		check( PlayerId.IsValid() );
 		return ShooterUIHelpers::Get().ProfileOpenedUI(*OwnerNetId.Get(), *PlayerId.Get(), NULL);
 	}
@@ -580,7 +580,7 @@ EVisibility SShooterScoreboardWidget::SpeakerIconVisibility(const FTeamPlayer Te
 	{
 		for (int32 i = 0; i < PlayersTalkingThisFrame.Num(); ++i)
 		{
-			if (PlayerState->UniqueId == PlayersTalkingThisFrame[i].Key && PlayersTalkingThisFrame[i].Value)
+			if (PlayerState->GetUniqueId() == PlayersTalkingThisFrame[i].Key && PlayersTalkingThisFrame[i].Value)
 			{
 				return EVisibility::Visible;
 			}
@@ -615,7 +615,7 @@ bool SShooterScoreboardWidget::ShouldPlayerBeDisplayed(const FTeamPlayer TeamPla
 {
 	const AShooterPlayerState* PlayerState = GetSortedPlayerState(TeamPlayer);
 	
-	return PlayerState != nullptr && !PlayerState->bOnlySpectator;
+	return PlayerState != nullptr && !PlayerState->IsOnlyASpectator();
 }
 
 FSlateColor SShooterScoreboardWidget::GetPlayerColor(const FTeamPlayer TeamPlayer) const
@@ -853,7 +853,7 @@ int32 SShooterScoreboardWidget::GetAttributeValue_Deaths(AShooterPlayerState* Pl
 
 int32 SShooterScoreboardWidget::GetAttributeValue_Score(AShooterPlayerState* PlayerState) const
 {
-	return FMath::TruncToInt(PlayerState->Score);
+	return FMath::TruncToInt(PlayerState->GetScore());
 }
 
 #undef LOCTEXT_NAMESPACE

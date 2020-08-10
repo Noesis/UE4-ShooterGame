@@ -3,7 +3,7 @@
 #ifndef __SHOOTERGAMELOADINGSCREEN_H__
 #define __SHOOTERGAMELOADINGSCREEN_H__
 
-#include "ModuleInterface.h"
+#include "Modules/ModuleInterface.h"
 
 
 /** Module interface for this game's loading screens */

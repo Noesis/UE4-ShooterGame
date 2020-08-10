@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "ShooterCharacter.h"
+#include "Player/ShooterCharacter.h"
 #include "ShooterBot.generated.h"
 
 UCLASS()

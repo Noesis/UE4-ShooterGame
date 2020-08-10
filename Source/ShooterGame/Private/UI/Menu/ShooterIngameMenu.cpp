@@ -5,7 +5,7 @@
 #include "ShooterStyle.h"
 #include "ShooterMenuSoundsWidgetStyle.h"
 #include "Online.h"
-#include "OnlineExternalUIInterface.h"
+#include "Interfaces/OnlineExternalUIInterface.h"
 #include "ShooterGameInstance.h"
 #include "UI/ShooterHUD.h"
 

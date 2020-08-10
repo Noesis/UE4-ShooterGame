@@ -7,7 +7,7 @@
 #include "ShooterOptionsWidgetStyle.h"
 #include "Player/ShooterPersistentUser.h"
 #include "ShooterGameUserSettings.h"
-#include "ShooterLocalPlayer.h"
+#include "Player/ShooterLocalPlayer.h"
 
 #define LOCTEXT_NAMESPACE "ShooterGame.HUD.Menu"
 

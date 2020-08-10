@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "SlateWidgetStyleContainerBase.h"
+#include "Styling/SlateWidgetStyleContainerBase.h"
 #include "ShooterMenuSoundsWidgetStyle.generated.h"
 
 /**

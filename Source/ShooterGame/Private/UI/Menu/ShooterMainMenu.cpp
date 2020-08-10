@@ -8,14 +8,14 @@
 #include "ShooterGameInstance.h"
 #include "SlateBasics.h"
 #include "SlateExtras.h"
-#include "GenericPlatformChunkInstall.h"
+#include "GenericPlatform/GenericPlatformChunkInstall.h"
 #include "Online/ShooterOnlineGameSettings.h"
 #include "OnlineSubsystemSessionSettings.h"
 #include "SShooterConfirmationDialog.h"
 #include "ShooterMenuItemWidgetStyle.h"
 #include "ShooterGameUserSettings.h"
 #include "ShooterGameViewportClient.h"
-#include "ShooterPersistentUser.h"
+#include "Player/ShooterPersistentUser.h"
 #include "Player/ShooterLocalPlayer.h"
 
 #define LOCTEXT_NAMESPACE "ShooterGame.HUD.Menu"
@@ -96,13 +96,13 @@ void FShooterMainMenu::Construct(TWeakObjectPtr<UShooterGameInstance> _GameInsta
 	}
 	
 	TArray<FText> MapList;
-	for (int32 i = 0; i < ARRAY_COUNT(MapNames); ++i)
+	for (int32 i = 0; i < UE_ARRAY_COUNT(MapNames); ++i)
 	{
 		MapList.Add(FText::FromString(MapNames[i]));		
 	}
 
 	TArray<FText> JoinMapList;
-	for (int32 i = 0; i < ARRAY_COUNT(JoinMapNames); ++i)
+	for (int32 i = 0; i < UE_ARRAY_COUNT(JoinMapNames); ++i)
 	{
 		JoinMapList.Add(FText::FromString(JoinMapNames[i]));
 	}
@@ -415,7 +415,7 @@ void FShooterMainMenu::Tick(float DeltaSeconds)
 		EMap SelectedMap = GetSelectedMap();
 		// use assetregistry when maps are added to it.
 		int32 MapChunk = ChunkMapping[(int)SelectedMap];
-		EChunkLocation::Type ChunkLocation = ChunkInstaller->GetChunkLocation(MapChunk);
+		EChunkLocation::Type ChunkLocation = ChunkInstaller->GetPakchunkLocation(MapChunk);
 
 		FText UpdatedText;
 		bool bUpdateText = false;
@@ -1368,7 +1368,7 @@ bool FShooterMainMenu::IsMapReady() const
 		EMap SelectedMap = GetSelectedMap();
 		// should use the AssetRegistry as soon as maps are added to the AssetRegistry
 		int32 MapChunk = ChunkMapping[(int)SelectedMap];
-		EChunkLocation::Type ChunkLocation = ChunkInstaller->GetChunkLocation(MapChunk);
+		EChunkLocation::Type ChunkLocation = ChunkInstaller->GetPakchunkLocation(MapChunk);
 		if (ChunkLocation == EChunkLocation::NotAvailable)
 		{			
 			bReady = false;

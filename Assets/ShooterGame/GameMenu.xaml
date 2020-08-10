@@ -1,0 +1,333 @@
+<UserControl
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+  xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+  xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
+  d:DesignWidth="1280" d:DesignHeight="720"
+  d:DataContext="{d:DesignData /SampleData/GameMenuSampleData/GameMenuSampleData.xaml}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="MenuResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Storyboard x:Key="OnMenuLoaded">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="MainPanel">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="Show"/>
+                </ObjectAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ResumeButton">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="-10"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="-10"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <SineEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="CheatsButton">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="-10"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="-10"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <SineEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="OptionsButton">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="-10"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="-10"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <SineEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="MenuButton">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="-10"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:1" Value="-10"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.1" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <SineEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="QuitButton">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="-10"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.1" Value="-10"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <SineEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ResumeButton">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <SineEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="CheatsButton">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="1">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <SineEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="OptionsButton">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <SineEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="MenuButton">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.1" Value="1">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <SineEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="QuitButton">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.1" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="1">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <SineEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="ResumeButton">
+                    <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                    <DiscreteBooleanKeyFrame KeyTime="0:0:0.7" Value="False"/>
+                    <DiscreteBooleanKeyFrame KeyTime="0:0:0.8" Value="True"/>
+                </BooleanAnimationUsingKeyFrames>
+                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="CheatsButton">
+                    <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                    <DiscreteBooleanKeyFrame KeyTime="0:0:0.8" Value="False"/>
+                    <DiscreteBooleanKeyFrame KeyTime="0:0:0.9" Value="True"/>
+                </BooleanAnimationUsingKeyFrames>
+                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="OptionsButton">
+                    <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                    <DiscreteBooleanKeyFrame KeyTime="0:0:0.9" Value="False"/>
+                    <DiscreteBooleanKeyFrame KeyTime="0:0:1" Value="True"/>
+                </BooleanAnimationUsingKeyFrames>
+                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="MenuButton">
+                    <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                    <DiscreteBooleanKeyFrame KeyTime="0:0:1" Value="False"/>
+                    <DiscreteBooleanKeyFrame KeyTime="0:0:1.1" Value="True"/>
+                </BooleanAnimationUsingKeyFrames>
+                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="QuitButton">
+                    <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                    <DiscreteBooleanKeyFrame KeyTime="0:0:1.1" Value="False"/>
+                    <DiscreteBooleanKeyFrame KeyTime="0:0:1.2" Value="True"/>
+                </BooleanAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="ResumeButton">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:1.2" Value="Selected"/>
+                </ObjectAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="MainPanel">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="MainPanel">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="CheatsPanel">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="CheatsPanel">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="OptionsPanel">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="OptionsPanel">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="UnselectAll">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="CheatsPanel">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Null}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="OptionsPanel">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Null}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="ResumeButton">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Null}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="CheatsButton">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Null}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="OptionsButton">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Null}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="MenuButton">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Null}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="QuitButton">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Null}"/>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="OnResumeSelected">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="ResumeButton">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="Selected"/>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="OnCheatsSelected">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="CheatsPanel">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="Show"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="CheatsButton">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="Selected"/>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="OnOptionsSelected">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="OptionsPanel">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="Show"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="OptionsButton">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="Selected"/>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="OnMenuSelected">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="MenuButton">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="Selected"/>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="OnQuitSelected">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="QuitButton">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="Selected"/>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="OnMainHide">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Completed">
+                        <i:InvokeCommandAction Command="{Binding HideMenu}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Tag)" Storyboard.TargetName="MainPanel">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Null}"/>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource OnMenuLoaded}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.GotFocus" SourceName="ResumeButton">
+            <BeginStoryboard Storyboard="{StaticResource UnselectAll}"/>
+            <BeginStoryboard Storyboard="{StaticResource OnResumeSelected}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.GotFocus" SourceName="CheatsButton">
+            <BeginStoryboard Storyboard="{StaticResource UnselectAll}"/>
+            <BeginStoryboard Storyboard="{StaticResource OnCheatsSelected}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.GotFocus" SourceName="OptionsButton">
+            <BeginStoryboard Storyboard="{StaticResource UnselectAll}"/>
+            <BeginStoryboard Storyboard="{StaticResource OnOptionsSelected}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.GotFocus" SourceName="MenuButton">
+            <BeginStoryboard Storyboard="{StaticResource UnselectAll}"/>
+            <BeginStoryboard Storyboard="{StaticResource OnMenuSelected}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.GotFocus" SourceName="QuitButton">
+            <BeginStoryboard Storyboard="{StaticResource UnselectAll}"/>
+            <BeginStoryboard Storyboard="{StaticResource OnQuitSelected}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ResumeButton">
+            <BeginStoryboard Storyboard="{StaticResource OnMainHide}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="MenuButton">
+            <BeginStoryboard Storyboard="{StaticResource OnMainHide}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="QuitButton">
+            <BeginStoryboard Storyboard="{StaticResource OnMainHide}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid TextElement.FontFamily="Fonts/#Saira" TextElement.FontWeight="SemiBold" TextElement.Foreground="{StaticResource Brush.PrimaryShade75}" noesis:Text.StrokeThickness="1.5">
+        <noesis:Text.Stroke>
+            <SolidColorBrush Color="{StaticResource Color.PrimaryShade0}" Opacity="0.25"/>
+        </noesis:Text.Stroke>
+        <Grid x:Name="RefGroup" d:IsLocked="True">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Decorator x:Name="REFx6" Grid.Row="0" Grid.RowSpan="6"/>
+            <Decorator x:Name="REFx12" Grid.Row="0" Grid.RowSpan="12"/>
+        </Grid>
+        <Grid Width="{Binding ActualHeight, ElementName=REFx12}" Height="{Binding ActualHeight, ElementName=REFx6}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+                <Viewbox Grid.Column="0" Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <ContentControl x:Name="MainPanel" Width="180" Height="180" Style="{StaticResource Style.MenuPanel}">
+                        <Grid Margin="0.5,8" KeyboardNavigation.TabNavigation="Cycle">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Button x:Name="ResumeButton" Grid.Row="0" Content="RESUME" Style="{StaticResource Style.MenuButton}" Command="{Binding Resume}"/>
+                            <Button x:Name="CheatsButton" Grid.Row="1" Content="CHEATS" Style="{StaticResource Style.MenuButton}"/>
+                            <Button x:Name="OptionsButton" Grid.Row="2" Content="OPTIONS" Style="{StaticResource Style.MenuButton}"/>
+                            <Button x:Name="MenuButton" Grid.Row="3" Content="MAIN MENU" Style="{StaticResource Style.MenuButton}" Command="{Binding BackToMainMenu}"/>
+                            <Button x:Name="QuitButton" Grid.Row="4" Content="QUIT" Style="{StaticResource Style.MenuButton}" Command="{Binding Quit}"/>
+                        </Grid>
+                    </ContentControl>
+                </Viewbox>
+                <Grid Grid.Column="1" x:Name="SelectedPanel">
+                    <Viewbox HorizontalAlignment="Left" VerticalAlignment="Top" d:IsHidden="True">
+                        <ContentControl x:Name="CheatsPanel" Style="{StaticResource Style.MenuPanel}" BorderBrush="{StaticResource Brush.PanelBorder.Dark}" Width="200" Height="110" Margin="8,0,0,75">
+                            <StackPanel Margin="10" KeyboardNavigation.TabNavigation="Cycle">
+                                <CheckBox Content="INFINITE AMMO" IsChecked="{Binding InfiniteAmmo}"/>
+                                <CheckBox Content="INFINITE CLIP" IsChecked="{Binding InfiniteClip}"/>
+                                <CheckBox Content="FREEZE MATCH TIMER" IsChecked="{Binding FreezeMatchTimer}"/>
+                                <CheckBox Content="HEALTH REGENERATION" IsChecked="{Binding HealthRegeneration}"/>
+                            </StackPanel>
+                        </ContentControl>
+                    </Viewbox>
+                    <Viewbox HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <ContentControl x:Name="OptionsPanel" Style="{StaticResource Style.MenuPanel}" BorderBrush="{StaticResource Brush.PanelBorder.Dark}" Width="220" Height="180" Margin="8,0,0,5">
+                            <StackPanel Margin="10" KeyboardNavigation.TabNavigation="Cycle">
+                                <ComboBox Tag="RESOLUTION" ItemsSource="{Binding Resolutions}" SelectedIndex="{Binding SelectedResolutionIndex}"/>
+                                <ComboBox Tag="QUALITY" ItemsSource="{Binding QualityPresets}" SelectedIndex="{Binding SelectedQualityIndex}"/>
+                                <CheckBox Content="FULLSCREEN" IsChecked="{Binding FullScreen}"/>
+                                <CheckBox Content="INVERT Y AXIS" IsChecked="{Binding InvertYAxis}"/>
+                                <Slider Tag="GAMMA" Minimum="-50" Maximum="50" Value="{Binding Gamma}" SmallChange="1" LargeChange="10"/>
+                                <Slider Tag="SENSITIVITY" Minimum="0" Maximum="50" Value="{Binding Sensitivity}" SmallChange="1" LargeChange="10"/>
+                                <Button Content="APPLY" Command="{Binding ApplyOptions}" Margin="0,12,0,0"/>
+                            </StackPanel>
+                        </ContentControl>
+                    </Viewbox>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

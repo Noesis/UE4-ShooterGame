@@ -1,7 +1,7 @@
 // Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
 
 #include "ShooterGame.h"
-#include "ShooterExplosionEffect.h"
+#include "Effects/ShooterExplosionEffect.h"
 
 AShooterExplosionEffect::AShooterExplosionEffect(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -16,7 +16,7 @@ AShooterExplosionEffect::AShooterExplosionEffect(const FObjectInitializer& Objec
 	ExplosionLight->bUseInverseSquaredFalloff = false;
 	ExplosionLight->LightColor = FColor(255, 185, 35);
 	ExplosionLight->CastShadows = false;
-	ExplosionLight->bVisible = true;
+	ExplosionLight->SetVisibility(true);
 
 	ExplosionLightFadeOut = 0.2f;
 }

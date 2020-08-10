@@ -47,7 +47,7 @@ void AShooterDemoSpectator::SetPlayer( UPlayer* InPlayer )
 	FActorSpawnParameters SpawnInfo;
 
 	SpawnInfo.Owner				= this;
-	SpawnInfo.Instigator		= Instigator;
+	SpawnInfo.Instigator		= GetInstigator();
 	SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
 	PlaybackSpeed = 2;

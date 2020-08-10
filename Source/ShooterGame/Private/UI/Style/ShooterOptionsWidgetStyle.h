@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "SlateWidgetStyleContainerBase.h"
+#include "Styling/SlateWidgetStyleContainerBase.h"
 #include "ShooterOptionsWidgetStyle.generated.h"
 
 /**

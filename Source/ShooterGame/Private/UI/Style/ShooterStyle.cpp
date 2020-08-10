@@ -2,7 +2,7 @@
 
 #include "ShooterGame.h"
 #include "ShooterStyle.h"
-#include "SlateGameResources.h"
+#include "Slate/SlateGameResources.h"
 
 TSharedPtr< FSlateStyleSet > FShooterStyle::ShooterStyleInstance = NULL;
 

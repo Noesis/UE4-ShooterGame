@@ -67,6 +67,10 @@ public:
 	//FTicker Funcs
 	virtual void Tick(float DeltaSeconds) override;	
 
+	virtual	void BeginDestroy() override;
+	virtual void DetachViewportClient() override;
+	void ReleaseSlateResources();
+
 #if WITH_EDITOR
 	virtual void DrawTransition(class UCanvas* Canvas) override;
 #endif //WITH_EDITOR

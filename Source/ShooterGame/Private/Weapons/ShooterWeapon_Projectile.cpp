@@ -75,7 +75,7 @@ void AShooterWeapon_Projectile::ServerFireProjectile_Implementation(FVector Orig
 	AShooterProjectile* Projectile = Cast<AShooterProjectile>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, ProjectileConfig.ProjectileClass, SpawnTM));
 	if (Projectile)
 	{
-		Projectile->Instigator = Instigator;
+		Projectile->SetInstigator(GetInstigator());
 		Projectile->SetOwner(this);
 		Projectile->InitVelocity(ShootDir);
 

@@ -3,8 +3,8 @@
 #include "ShooterGame.h"
 #include "ShooterGameViewportClient.h"
 #include "SShooterConfirmationDialog.h"
-#include "SSafeZone.h"
-#include "SThrobber.h"
+#include "Widgets/Layout/SSafeZone.h"
+#include "Widgets/Images/SThrobber.h"
 #include "Player/ShooterLocalPlayer.h"
 
 UShooterGameViewportClient::UShooterGameViewportClient(const FObjectInitializer& ObjectInitializer)
@@ -251,6 +251,28 @@ void UShooterGameViewportClient::DrawTransition(UCanvas* Canvas)
 	}
 }
 #endif //WITH_EDITOR
+
+void UShooterGameViewportClient::BeginDestroy()
+{
+	ReleaseSlateResources();
+
+	Super::BeginDestroy();
+}
+
+void UShooterGameViewportClient::DetachViewportClient()
+{
+	Super::DetachViewportClient();
+
+	ReleaseSlateResources();
+}
+
+void UShooterGameViewportClient::ReleaseSlateResources()
+{
+	OldFocusWidget.Reset();
+	LoadingScreenWidget.Reset();
+	ViewportContentStack.Empty();
+	HiddenViewportContentStack.Empty();
+}
 
 void SShooterLoadingScreen::Construct(const FArguments& InArgs)
 {

@@ -11,10 +11,10 @@
 #include "UI/Style/ShooterStyle.h"
 #include "UI/ShooterHUD.h"
 #include "Online.h"
-#include "OnlineAchievementsInterface.h"
-#include "OnlineEventsInterface.h"
-#include "OnlineIdentityInterface.h"
-#include "OnlineSessionInterface.h"
+#include "Interfaces/OnlineAchievementsInterface.h"
+#include "Interfaces/OnlineEventsInterface.h"
+#include "Interfaces/OnlineIdentityInterface.h"
+#include "Interfaces/OnlineSessionInterface.h"
 #include "ShooterGameInstance.h"
 #include "ShooterLeaderboards.h"
 #include "ShooterGameViewportClient.h"
@@ -268,7 +268,7 @@ bool AShooterPlayerController::FindDeathCameraSpot(FVector& CameraLocation, FRot
 	FCollisionQueryParams TraceParams(SCENE_QUERY_STAT(DeathCamera), true, GetPawn());
 
 	FHitResult HitResult;
-	for (int32 i = 0; i < ARRAY_COUNT(YawOffsets); i++)
+	for (int32 i = 0; i < UE_ARRAY_COUNT(YawOffsets); i++)
 	{
 		FRotator CameraDir = ViewDir;
 		CameraDir.Yaw += YawOffsets[i];
@@ -361,10 +361,10 @@ void AShooterPlayerController::OnDeathMessage(class AShooterPlayerState* KillerP
 	PlayerKilledDelegate.Broadcast(KillerPlayerState, KilledPlayerState, KillerDamageType);
 
 	ULocalPlayer* LocalPlayer = Cast<ULocalPlayer>(Player);
-	if (LocalPlayer && LocalPlayer->GetCachedUniqueNetId().IsValid() && KilledPlayerState->UniqueId.IsValid())
+	if (LocalPlayer && LocalPlayer->GetCachedUniqueNetId().IsValid() && KilledPlayerState->GetUniqueId().IsValid())
 	{
 		// if this controller is the player who died, update the hero stat.
-		if (*LocalPlayer->GetCachedUniqueNetId() == *KilledPlayerState->UniqueId)
+		if (*LocalPlayer->GetCachedUniqueNetId() == *KilledPlayerState->GetUniqueId())
 		{
 			const auto Events = Online::GetEventsInterface();
 			const auto Identity = Online::GetIdentityInterface();
@@ -1010,18 +1010,18 @@ bool AShooterPlayerController::SetPause(bool bPause, FCanUnpause CanUnpauseDeleg
 	}
 
 	// Don't send pause events while online since the game doesn't actually pause
-	if(GetNetMode() == NM_Standalone && Events.IsValid() && PlayerState->UniqueId.IsValid())
+	if(GetNetMode() == NM_Standalone && Events.IsValid() && PlayerState->GetUniqueId().IsValid())
 	{
 		FOnlineEventParms Params;
 		Params.Add( TEXT( "GameplayModeId" ), FVariantData( (int32)1 ) ); // @todo determine game mode (ffa v tdm)
 		Params.Add( TEXT( "DifficultyLevelId" ), FVariantData( (int32)0 ) ); // unused
 		if(Result && bPause)
 		{
-			Events->TriggerEvent(*PlayerState->UniqueId, TEXT("PlayerSessionPause"), Params);
+			Events->TriggerEvent(*PlayerState->GetUniqueId(), TEXT("PlayerSessionPause"), Params);
 		}
 		else
 		{
-			Events->TriggerEvent(*PlayerState->UniqueId, TEXT("PlayerSessionResume"), Params);
+			Events->TriggerEvent(*PlayerState->GetUniqueId(), TEXT("PlayerSessionResume"), Params);
 		}
 	}
 

@@ -8,12 +8,11 @@
 #include "ParticleDefinitions.h"
 #include "SoundDefinitions.h"
 #include "Net/UnrealNetwork.h"
-#include "ShooterGameMode.h"
-#include "ShooterGameState.h"
-#include "ShooterCharacter.h"
-#include "ShooterCharacterMovement.h"
-#include "ShooterPlayerController.h"
-#include "ShooterGameClasses.h"
+#include "Online/ShooterGameMode.h"
+#include "Online/ShooterGameState.h"
+#include "Player/ShooterCharacter.h"
+#include "Player/ShooterCharacterMovement.h"
+#include "Player/ShooterPlayerController.h"
 
 
 class UBehaviorTreeComponent;

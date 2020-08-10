@@ -76,16 +76,15 @@ void AShooterAIController::FindClosestEnemy()
 	float BestDistSq = MAX_FLT;
 	AShooterCharacter* BestPawn = NULL;
 
-	for (FConstPawnIterator It = GetWorld()->GetPawnIterator(); It; ++It)
+	for (TActorIterator<AShooterCharacter> TestPawn(GetWorld()); TestPawn; ++TestPawn)
 	{
-		AShooterCharacter* TestPawn = Cast<AShooterCharacter>(*It);
 		if (TestPawn && TestPawn->IsAlive() && TestPawn->IsEnemyFor(this))
 		{
 			const float DistSq = (TestPawn->GetActorLocation() - MyLoc).SizeSquared();
 			if (DistSq < BestDistSq)
 			{
 				BestDistSq = DistSq;
-				BestPawn = TestPawn;
+				BestPawn = *TestPawn;
 			}
 		}
 	}

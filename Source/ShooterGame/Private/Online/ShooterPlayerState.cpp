@@ -1,7 +1,7 @@
 // Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
 
 #include "ShooterGame.h"
-#include "ShooterPlayerState.h"
+#include "Online/ShooterPlayerState.h"
 
 AShooterPlayerState::AShooterPlayerState(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -28,7 +28,7 @@ void AShooterPlayerState::Reset()
 
 void AShooterPlayerState::UnregisterPlayerWithSession()
 {
-	if (!bFromPreviousLevel)
+	if (!IsFromPreviousLevel())
 	{
 		Super::UnregisterPlayerWithSession();
 	}
@@ -109,7 +109,7 @@ int32 AShooterPlayerState::GetDeaths() const
 
 float AShooterPlayerState::GetScore() const
 {
-	return Score;
+	return Super::GetScore();
 }
 
 int32 AShooterPlayerState::GetNumBulletsFired() const
@@ -152,13 +152,13 @@ void AShooterPlayerState::ScorePoints(int32 Points)
 		MyGameState->TeamScores[TeamNumber] += Points;
 	}
 
-	Score += Points;
+	SetScore(GetScore() + Points);
 }
 
 void AShooterPlayerState::InformAboutKill_Implementation(class AShooterPlayerState* KillerPlayerState, const UDamageType* KillerDamageType, class AShooterPlayerState* KilledPlayerState)
 {
 	//id can be null for bots
-	if (KillerPlayerState->UniqueId.IsValid())
+	if (KillerPlayerState->GetUniqueId().IsValid())
 	{	
 		//search for the actual killer before calling OnKill()	
 		for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
@@ -169,7 +169,7 @@ void AShooterPlayerState::InformAboutKill_Implementation(class AShooterPlayerSta
 				// a local player might not have an ID if it was created with CreateDebugPlayer.
 				ULocalPlayer* LocalPlayer = Cast<ULocalPlayer>(TestPC->Player);
 				FUniqueNetIdRepl LocalID = LocalPlayer->GetCachedUniqueNetId();
-				if (LocalID.IsValid() &&  *LocalPlayer->GetCachedUniqueNetId() == *KillerPlayerState->UniqueId)
+				if (LocalID.IsValid() &&  *LocalPlayer->GetCachedUniqueNetId() == *KillerPlayerState->GetUniqueId())
 				{			
 					TestPC->OnKill();
 				}

@@ -10,7 +10,7 @@ public class ShooterGameServerTarget : TargetRules
 	{
 		Type = TargetType.Server;
 		bUsesSteam = true;
-
+		DefaultBuildSettings = BuildSettingsVersion.V2;
 		ExtraModuleNames.Add("ShooterGame");
 	}
 }

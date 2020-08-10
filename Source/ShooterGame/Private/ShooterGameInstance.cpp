@@ -221,7 +221,7 @@ void UShooterGameInstance::OnPreLoadMap(const FString& MapName)
 	if ( bPendingEnableSplitscreen )
 	{
 		// Allow splitscreen
-		GetGameViewportClient()->SetDisableSplitscreenOverride( false );
+		GetGameViewportClient()->SetForceDisableSplitscreen( false );
 
 		bPendingEnableSplitscreen = false;
 	}
@@ -300,7 +300,7 @@ void UShooterGameInstance::StartGameInstance()
 	const TCHAR* Cmd = FCommandLine::Get();
 
 	// Catch the case where we want to override the map name on startup (used for connecting to other MP instances)
-	if (FParse::Token(Cmd, Parm, ARRAY_COUNT(Parm), 0) && Parm[0] != '-')
+	if (FParse::Token(Cmd, Parm, UE_ARRAY_COUNT(Parm), 0) && Parm[0] != '-')
 	{
 		// if we're 'overriding' with the default map anyway, don't set a bogus 'playing' state.
 		if (!MainMenuMap.Contains(Parm))
@@ -630,7 +630,7 @@ void UShooterGameInstance::BeginWelcomeScreenState()
 	WelcomeMenuUI->AddToGameViewport();
 
 	// Disallow splitscreen (we will allow while in the playing state)
-	GetGameViewportClient()->SetDisableSplitscreenOverride( true );
+	GetGameViewportClient()->SetForceDisableSplitscreen( true );
 }
 
 void UShooterGameInstance::EndWelcomeScreenState()
@@ -680,7 +680,7 @@ void UShooterGameInstance::BeginMainMenuState()
 	
 	if (GameViewportClient)
 	{
-		GetGameViewportClient()->SetDisableSplitscreenOverride(true);
+		GetGameViewportClient()->SetForceDisableSplitscreen(true);
 	}
 
 	// Remove any possible splitscren players
@@ -776,7 +776,7 @@ void UShooterGameInstance::BeginPlayingState()
 void UShooterGameInstance::EndPlayingState()
 {
 	// Disallow splitscreen
-	GetGameViewportClient()->SetDisableSplitscreenOverride( true );
+	GetGameViewportClient()->SetForceDisableSplitscreen( true );
 
 	// Clear the players' presence information
 	SetPresenceForLocalPlayers(FString(TEXT("In Menu")), FVariantData(FString(TEXT("OnMenu"))));
@@ -1481,10 +1481,10 @@ FReply UShooterGameInstance::OnPairingUseNewProfile()
 	return FReply::Handled();
 }
 
-void UShooterGameInstance::HandleControllerPairingChanged( int GameUserIndex, const FUniqueNetId& PreviousUser, const FUniqueNetId& NewUser )
+void UShooterGameInstance::HandleControllerPairingChanged( int GameUserIndex, FControllerPairingChangedUserInfo PreviousUser, FControllerPairingChangedUserInfo NewUser )
 {
 	UE_LOG(LogOnlineGame, Log, TEXT("UShooterGameInstance::HandleControllerPairingChanged GameUserIndex %d PreviousUser '%s' NewUser '%s'"),
-		GameUserIndex, *PreviousUser.ToString(), *NewUser.ToString());
+		GameUserIndex, *PreviousUser.User.ToString(), *NewUser.User.ToString());
 	
 	if ( CurrentState == ShooterGameInstanceState::WelcomeScreen )
 	{
@@ -2022,7 +2022,7 @@ void UShooterGameInstance::ReceivedNetworkEncryptionToken(const FString& Encrypt
 	else
 	{
 		Response.Response = EEncryptionResponse::Success;
-		Response.EncryptionKey = DebugTestEncryptionKey;
+		//Response.EncryptionKey = DebugTestEncryptionKey;
 	}
 
 	Delegate.ExecuteIfBound(Response);
@@ -2041,7 +2041,7 @@ void UShooterGameInstance::ReceivedNetworkEncryptionAck(const FOnEncryptionKeyRe
 	TArray<uint8> FakeKey;
 	
 	Response.Response = EEncryptionResponse::Success;
-	Response.EncryptionKey = DebugTestEncryptionKey;
+	//Response.EncryptionKey = DebugTestEncryptionKey;
 
 	Delegate.ExecuteIfBound(Response);
 }

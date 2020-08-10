@@ -2,7 +2,7 @@
 #pragma once
 
 #include "ShooterTypes.h"
-#include "OnlineLeaderboardInterface.h"
+#include "Interfaces/OnlineLeaderboardInterface.h"
 
 // these are normally exported from platform-specific tools
 #define LEADERBOARD_STAT_SCORE				"Score"

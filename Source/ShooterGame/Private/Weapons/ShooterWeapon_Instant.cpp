@@ -41,13 +41,13 @@ void AShooterWeapon_Instant::ServerNotifyHit_Implementation(const FHitResult& Im
 	const float WeaponAngleDot = FMath::Abs(FMath::Sin(ReticleSpread * PI / 180.f));
 
 	// if we have an instigator, calculate dot between the view and the shot
-	if (Instigator && (Impact.GetActor() || Impact.bBlockingHit))
+	if (GetInstigator() && (Impact.GetActor() || Impact.bBlockingHit))
 	{
 		const FVector Origin = GetMuzzleLocation();
 		const FVector ViewDir = (Impact.Location - Origin).GetSafeNormal();
 
 		// is the angle between the hit and the view within allowed limits (limit + weapon max angle)
-		const float ViewDotHitDir = FVector::DotProduct(Instigator->GetViewRotation().Vector(), ViewDir);
+		const float ViewDotHitDir = FVector::DotProduct(GetInstigator()->GetViewRotation().Vector(), ViewDir);
 		if (ViewDotHitDir > InstantConfig.AllowedViewDotHitDir - WeaponAngleDot)
 		{
 			if (CurrentState != EWeaponState::Idle)
@@ -167,7 +167,7 @@ void AShooterWeapon_Instant::ProcessInstantHit_Confirmed(const FHitResult& Impac
 	}
 
 	// play FX on remote clients
-	if (Role == ROLE_Authority)
+	if (GetLocalRole() == ROLE_Authority)
 	{
 		HitNotify.Origin = Origin;
 		HitNotify.RandomSeed = RandomSeed;
@@ -191,7 +191,7 @@ bool AShooterWeapon_Instant::ShouldDealDamage(AActor* TestActor) const
 	if (TestActor)
 	{
 		if (GetNetMode() != NM_Client ||
-			TestActor->Role == ROLE_Authority ||
+			TestActor->GetLocalRole() == ROLE_Authority ||
 			TestActor->GetTearOff())
 		{
 			return true;
