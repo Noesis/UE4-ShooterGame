@@ -229,6 +229,67 @@
         <Setter Property="Margin" Value="0,0,0,1"/>
         <Setter Property="Template" Value="{StaticResource Template.CheckBox}"/>
     </Style>
+    <ControlTemplate x:Key="Template.Slider.Repeat" TargetType="RepeatButton">
+        <Border Background="Transparent"/>
+    </ControlTemplate>
+    <ControlTemplate x:Key="Template.Slider.Thumb" TargetType="Thumb">
+        <Border CornerRadius="1" BorderThickness="1" Margin="-2">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{StaticResource Color.SecondaryShade0}" Opacity="0.2"/>
+            </Border.BorderBrush>
+            <Border x:Name="Border" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Background="{StaticResource Brush.PrimaryShade75}">
+                <Border x:Name="Drag" BorderThickness="0,1" BorderBrush="{TemplateBinding BorderBrush}" Margin="2,4"/>
+            </Border>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource Brush.SecondaryShade100}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="Template.Slider" TargetType="Slider">
+        <Grid x:Name="Root" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="19*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{TemplateBinding Tag}" Margin="4,0"/>
+            <Grid Grid.Column="1" Margin="4,2">
+                <Border x:Name="TrackBg" Height="2" Background="{StaticResource Brush.Primary}"/>
+                <Track x:Name="PART_Track">
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Template="{StaticResource Template.Slider.Repeat}" Command="Slider.DecreaseLarge" Focusable="False"/>
+                    </Track.DecreaseRepeatButton>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Template="{StaticResource Template.Slider.Repeat}" Command="Slider.IncreaseLarge" Focusable="False"/>
+                    </Track.IncreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb x:Name="Thumb" Width="10" Height="14" BorderBrush="{StaticResource Brush.Primary}" Template="{StaticResource Template.Slider.Thumb}"/>
+                    </Track.Thumb>
+                </Track>
+            </Grid>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="TrackBg" Property="Background" Value="{StaticResource Brush.Secondary}"/>
+                <Setter TargetName="Thumb" Property="BorderBrush" Value="{StaticResource Brush.Secondary}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush.PrimaryShade100}"/>
+            </Trigger>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter TargetName="Root" Property="Background" Value="{StaticResource Brush.ControlFocusedBackground}"/>
+                <Setter TargetName="TrackBg" Property="Background" Value="{StaticResource Brush.Secondary}"/>
+                <Setter TargetName="Thumb" Property="BorderBrush" Value="{StaticResource Brush.Secondary}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush.PrimaryShade100}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style TargetType="Slider">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Margin" Value="0,0,0,1"/>
+        <Setter Property="Template" Value="{StaticResource Template.Slider}"/>
+    </Style>
     <ControlTemplate x:Key="Template.ScrollBar.Thumb" TargetType="Thumb">
         <Border CornerRadius="1" BorderThickness="1">
             <Border.BorderBrush>
@@ -429,67 +490,6 @@
         <Setter Property="FontWeight" Value="Regular"/>
         <Setter Property="FontSize" Value="10"/>
         <Setter Property="Template" Value="{StaticResource Template.ComboBoxItem}"/>
-    </Style>
-    <ControlTemplate x:Key="Template.Slider.Repeat" TargetType="RepeatButton">
-        <Border Background="Transparent"/>
-    </ControlTemplate>
-    <ControlTemplate x:Key="Template.Slider.Thumb" TargetType="Thumb">
-        <Border CornerRadius="1" BorderThickness="1" Margin="-2">
-            <Border.BorderBrush>
-                <SolidColorBrush Color="{StaticResource Color.SecondaryShade0}" Opacity="0.2"/>
-            </Border.BorderBrush>
-            <Border x:Name="Border" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Background="{StaticResource Brush.PrimaryShade75}">
-                <Border x:Name="Drag" BorderThickness="0,1" BorderBrush="{TemplateBinding BorderBrush}" Margin="2,4"/>
-            </Border>
-        </Border>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsKeyboardFocused" Value="True">
-                <Setter TargetName="Border" Property="Background" Value="{StaticResource Brush.SecondaryShade100}"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-    <ControlTemplate x:Key="Template.Slider" TargetType="Slider">
-        <Grid x:Name="Root" Background="Transparent">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="19*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="{TemplateBinding Tag}" Margin="4,0"/>
-            <Grid Grid.Column="1" Margin="4,2">
-                <Border x:Name="TrackBg" Height="2" Background="{StaticResource Brush.Primary}"/>
-                <Track x:Name="PART_Track">
-                    <Track.DecreaseRepeatButton>
-                        <RepeatButton Template="{StaticResource Template.Slider.Repeat}" Command="Slider.DecreaseLarge" Focusable="False"/>
-                    </Track.DecreaseRepeatButton>
-                    <Track.IncreaseRepeatButton>
-                        <RepeatButton Template="{StaticResource Template.Slider.Repeat}" Command="Slider.IncreaseLarge" Focusable="False"/>
-                    </Track.IncreaseRepeatButton>
-                    <Track.Thumb>
-                        <Thumb x:Name="Thumb" Width="10" Height="14" BorderBrush="{StaticResource Brush.Primary}" Template="{StaticResource Template.Slider.Thumb}"/>
-                    </Track.Thumb>
-                </Track>
-            </Grid>
-        </Grid>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="TrackBg" Property="Background" Value="{StaticResource Brush.Secondary}"/>
-                <Setter TargetName="Thumb" Property="BorderBrush" Value="{StaticResource Brush.Secondary}"/>
-                <Setter Property="Foreground" Value="{StaticResource Brush.PrimaryShade100}"/>
-            </Trigger>
-            <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                <Setter TargetName="Root" Property="Background" Value="{StaticResource Brush.ControlFocusedBackground}"/>
-                <Setter TargetName="TrackBg" Property="Background" Value="{StaticResource Brush.Secondary}"/>
-                <Setter TargetName="Thumb" Property="BorderBrush" Value="{StaticResource Brush.Secondary}"/>
-                <Setter Property="Foreground" Value="{StaticResource Brush.PrimaryShade100}"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-    <Style TargetType="Slider">
-        <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Margin" Value="0,0,0,1"/>
-        <Setter Property="Template" Value="{StaticResource Template.Slider}"/>
     </Style>
     <ControlTemplate x:Key="Template.Button" TargetType="Button">
         <Border x:Name="Base" BorderThickness="0,0,0,1" BorderBrush="#30000000" Background="{StaticResource Brush.PrimaryShade0}">
