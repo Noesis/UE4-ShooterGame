@@ -28,7 +28,7 @@ void SChatWidget::Construct(const FArguments& InArgs, const FLocalPlayerContext&
 	// Copy the font we'll be using for chat, and limit the font fallback to localized only, for performance reasons
 	ChatFont = FShooterStyle::Get().GetFontStyle("ShooterGame.ChatFont");
 
-	ChatFont.FontFallback = EFontFallback::FF_LocalizedFallback;
+	ChatFont.FontFallback = EFontFallback::FF_NoFallback;
 
 
 	// Initialize Menu

@@ -41,7 +41,8 @@ public class ShooterGame : ModuleRules
 				"SlateCore",
 				"ShooterGameLoadingScreen",
 				"Json",
-				"ApplicationCore"
+				"ApplicationCore",
+				"PhysicsCore"
 			}
 		);
 

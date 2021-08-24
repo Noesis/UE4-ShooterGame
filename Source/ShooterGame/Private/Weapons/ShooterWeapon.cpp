@@ -839,7 +839,7 @@ void AShooterWeapon::SimulateWeaponFire()
 	{
 		if (FireCameraShake != NULL)
 		{
-			PC->ClientPlayCameraShake(FireCameraShake, 1);
+			PC->ClientStartCameraShake(FireCameraShake, 1);
 		}
 		if (FireForceFeedback != NULL && PC->IsVibrationEnabled())
 		{

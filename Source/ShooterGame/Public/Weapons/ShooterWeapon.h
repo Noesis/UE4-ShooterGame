@@ -10,7 +10,7 @@ class UAnimMontage;
 class AShooterCharacter;
 class UAudioComponent;
 class UParticleSystemComponent;
-class UCameraShake;
+class UMatineeCameraShake;
 class UForceFeedbackEffect;
 class USoundCue;
 
@@ -321,7 +321,7 @@ protected:
 
 	/** camera shake on firing */
 	UPROPERTY(EditDefaultsOnly, Category=Effects)
-	TSubclassOf<UCameraShake> FireCameraShake;
+	TSubclassOf<UMatineeCameraShake> FireCameraShake;
 
 	/** force feedback effect to play when the weapon is fired */
 	UPROPERTY(EditDefaultsOnly, Category=Effects)

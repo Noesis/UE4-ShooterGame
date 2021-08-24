@@ -791,7 +791,7 @@ TSharedRef<SWidget> SShooterScoreboardWidget::MakePlayerRow(const FTeamPlayer& T
 		.HAlign(HAlign_Right)
 		.VAlign(VAlign_Center)
 		.Visibility(this, &SShooterScoreboardWidget::PlayerPresenceToItemVisibility, TeamPlayer)
-		.OnMouseMove(this, &SShooterScoreboardWidget::OnMouseOverPlayer, TeamPlayer)
+		.OnMouseMove((SShooterScoreboardWidget*)this, &SShooterScoreboardWidget::OnMouseOverPlayer, TeamPlayer)
 		.BorderBackgroundColor(this, &SShooterScoreboardWidget::GetScoreboardBorderColor, TeamPlayer)
 		.BorderImage(&ScoreboardStyle->ItemBorderBrush)
 		[
@@ -812,7 +812,7 @@ TSharedRef<SWidget> SShooterScoreboardWidget::MakePlayerRow(const FTeamPlayer& T
 			.VAlign(VAlign_Center)
 			.HAlign(HAlign_Center)
 			.Visibility(this, &SShooterScoreboardWidget::PlayerPresenceToItemVisibility, TeamPlayer)
-			.OnMouseMove(this, &SShooterScoreboardWidget::OnMouseOverPlayer, TeamPlayer)
+			.OnMouseMove((SShooterScoreboardWidget*)this, &SShooterScoreboardWidget::OnMouseOverPlayer, TeamPlayer)
 			.BorderBackgroundColor(this, &SShooterScoreboardWidget::GetScoreboardBorderColor, TeamPlayer)
 			.BorderImage(&ScoreboardStyle->ItemBorderBrush)
 			[

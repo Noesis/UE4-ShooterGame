@@ -113,6 +113,10 @@ public:
 	virtual void Init() override;
 	virtual void Shutdown() override;
 	virtual void StartGameInstance() override;
+#if WITH_EDITOR
+	virtual FGameInstancePIEResult StartPlayInEditorGameInstance(ULocalPlayer* LocalPlayer, const FGameInstancePIEParameters& Params) override;
+#endif	// WITH_EDITOR
+
 	virtual void ReceivedNetworkEncryptionToken(const FString& EncryptionToken, const FOnEncryptionKeyResponse& Delegate) override;
 	virtual void ReceivedNetworkEncryptionAck(const FOnEncryptionKeyResponse& Delegate) override;
 

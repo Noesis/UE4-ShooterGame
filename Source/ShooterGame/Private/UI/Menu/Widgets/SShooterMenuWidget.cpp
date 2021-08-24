@@ -241,7 +241,7 @@ bool SShooterMenuWidget::ProfileUISwap(const int ControllerIndex) const
 {
 	if(IsProfileSwapActive())
 	{
-		const FOnLoginUIClosedDelegate Delegate = FOnLoginUIClosedDelegate::CreateSP( this, &SShooterMenuWidget::HandleProfileUISwapClosed );
+		const FOnLoginUIClosedDelegate Delegate = FOnLoginUIClosedDelegate::CreateSP( (SShooterMenuWidget*)this, &SShooterMenuWidget::HandleProfileUISwapClosed );
 		if ( ShooterUIHelpers::Get().ProfileSwapUI(ControllerIndex, false, &Delegate) )
 		{
 			UShooterGameInstance* GameInstance = PlayerOwner.IsValid() ? Cast< UShooterGameInstance >( PlayerOwner->GetGameInstance() ) : nullptr;

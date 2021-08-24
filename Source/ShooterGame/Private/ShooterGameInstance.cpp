@@ -341,6 +341,43 @@ void UShooterGameInstance::StartGameInstance()
 	GotoInitialState();
 }
 
+#if WITH_EDITOR
+
+FGameInstancePIEResult UShooterGameInstance::StartPlayInEditorGameInstance(ULocalPlayer* LocalPlayer, const FGameInstancePIEParameters& Params)
+{
+	FWorldContext* PlayWorldContext = GetWorldContext();
+	check(PlayWorldContext);
+
+	UWorld* PlayWorld = PlayWorldContext->World();
+	check(PlayWorld);
+
+	FString CurrentMapName = PlayWorld->GetOutermost()->GetName();
+	if (!PlayWorldContext->PIEPrefix.IsEmpty())
+	{
+		CurrentMapName.ReplaceInline(*PlayWorldContext->PIEPrefix, TEXT(""));
+	}
+
+#if SHOOTER_CONSOLE_UI
+	if (CurrentMapName == WelcomeScreenMap)
+	{
+		GotoState(ShooterGameInstanceState::WelcomeScreen);
+	}
+	else 
+#endif	// SHOOTER_CONSOLE_UI
+	if (CurrentMapName == MainMenuMap)
+	{
+		GotoState(ShooterGameInstanceState::MainMenu);
+	}
+	else
+	{
+		GotoState(ShooterGameInstanceState::Playing);
+	}
+
+	return Super::StartPlayInEditorGameInstance(LocalPlayer, Params);
+}
+
+#endif	// WITH_EDITOR
+
 FName UShooterGameInstance::GetInitialState()
 {
 #if SHOOTER_CONSOLE_UI	
@@ -1205,6 +1242,9 @@ bool UShooterGameInstance::Tick(float DeltaSeconds)
 	{
 		return true;
 	}
+
+	// Because this takes place outside the normal UWorld tick, we need to register what world we're ticking/modifying here to avoid issues in the editor
+	FScopedConditionalWorldSwitcher WorldSwitcher(GetWorld());
 
 	MaybeChangeState();
 

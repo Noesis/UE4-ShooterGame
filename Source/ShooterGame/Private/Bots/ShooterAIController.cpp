@@ -105,9 +105,9 @@ bool AShooterAIController::FindClosestEnemyWithLOS(AShooterCharacter* ExcludeEne
 		float BestDistSq = MAX_FLT;
 		AShooterCharacter* BestPawn = NULL;
 
-		for (FConstPawnIterator It = GetWorld()->GetPawnIterator(); It; ++It)
+		for (auto It = TActorIterator<AShooterCharacter>(GetWorld()); It; ++It)
 		{
-			AShooterCharacter* TestPawn = Cast<AShooterCharacter>(*It);
+			AShooterCharacter* TestPawn = *It;
 			if (TestPawn && TestPawn != ExcludeEnemy && TestPawn->IsAlive() && TestPawn->IsEnemyFor(this))
 			{
 				if (HasWeaponLOSToEnemy(TestPawn, true) == true)
