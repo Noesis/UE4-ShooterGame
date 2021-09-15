@@ -6,6 +6,7 @@
 #include "Bots/ShooterAIController.h"
 #include "Online/ShooterPlayerState.h"
 #include "UI/ShooterHUD.h"
+#include "MatineeCameraShake.h"
 
 AShooterWeapon::AShooterWeapon(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
