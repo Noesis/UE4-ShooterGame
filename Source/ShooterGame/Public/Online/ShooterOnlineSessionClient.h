@@ -21,6 +21,4 @@ public:
 		const FOnlineSessionSearchResult &	InviteResult
 	) override;
 
-	virtual void OnPlayTogetherEventReceived(int32 UserIndex, TArray<TSharedPtr<const FUniqueNetId>> UserIdList) override;
-
 };

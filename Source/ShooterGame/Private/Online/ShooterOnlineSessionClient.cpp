@@ -50,11 +50,3 @@ void UShooterOnlineSessionClient::OnSessionUserInviteAccepted(
 		ShooterGameInstance->GotoState(ShooterGameInstanceState::PendingInvite);
 	}
 }
-
-void UShooterOnlineSessionClient::OnPlayTogetherEventReceived(int32 UserIndex, TArray<TSharedPtr<const FUniqueNetId>> UserIdList)
-{	
-	if (UShooterGameInstance* const ShooterGameInstance = Cast<UShooterGameInstance>(GetGameInstance()))
-	{
-		ShooterGameInstance->OnPlayTogetherEventReceived(UserIndex, UserIdList);
-	}
-}
