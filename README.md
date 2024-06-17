@@ -8,9 +8,6 @@ This is a modified version of Epic's ShooterGame tutorial in which we've replace
 
 ## Demo Breakdown
 
-### Blueprint
-
-* `Blueprint'/Game/ShooterGame/ShooterGame_Menu_Noesis.ShooterGame_Menu_Noesis'`, `Blueprint'/Game/ShooterGame/ShooterGame_TeamDeathmatch_Noesis.ShooterGame_TeamDeathmatch_Noesis'` and `Blueprint'/Game/ShooterGame/ShotterGame_FreeForAll_Noesis.ShotterGame_FreeForAll_Noesis'`: These `GameMode`s replace the original ones. They specify which controllers to use (`Blueprint'/Game/ShooterGame/ShooterPlayerController_Menu_Noesis.ShooterPlayerController_Menu_Noesis'` in `Blueprint'/Game/ShooterGame/ShooterGame_Menu_Noesis.ShooterGame_Menu_Noesis'` and `Blueprint'/Game/ShooterGame/ShooterPlayerController_Noesis.ShooterPlayerController_Noesis'` in the other two), and specify no `HUD` will be used, as we will be using NoesisGUI for it.
 
 ![Blueprint'/Game/ShooterGame/ShooterGame_Menu_Noesis.ShooterGame_Menu_Noesis'](https://noesis.github.io/NoesisGUI/Samples/ShooterGame/UE4/ShooterGame_Menu_Noesis.PNG)
 
